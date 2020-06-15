@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Warehouse Management</string>
+    <string name="login">Login</string>
+    <string name="xem_thong_so">Xem thong so</string>
+    <string name="textview">TextView</string>
+    <string name="button">Button</string>
+</resources>
