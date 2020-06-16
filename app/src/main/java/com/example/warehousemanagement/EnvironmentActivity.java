@@ -12,8 +12,12 @@ import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EnvironmentActivity extends AppCompatActivity {
 
@@ -35,10 +39,12 @@ public class EnvironmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                sendDataToMQTT("Speaker", "[\"1\", \"100\"]" );
+                try {
+                    sendDataToMQTT("Speaker", "0" , "30");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 startMQTT("Speaker", "Topic/Speaker");
-
-
             }
         });
 
@@ -70,21 +76,25 @@ public class EnvironmentActivity extends AppCompatActivity {
         });
     }
 
-    private void sendDataToMQTT(String ID, String value){
+    private void sendDataToMQTT(String ID, String value1, String value2) throws JSONException {
 
         MqttMessage msg = new MqttMessage();
         msg.setId(1234);
         msg.setQos(0);
         msg.setRetained(true);
 
-        String data = ID + ":" + value;
+        List<String> list = new ArrayList<String>();
+        list.add(value1);
+        list.add(value2);
+        JSONObject payload = new JSONObject();
+        payload.put("device id", ID);
+        payload.put("values", list);
 
-        byte[] b = data.getBytes(Charset.forName("UTF-8"));
+        byte[] b = payload.toString().getBytes(Charset.forName("UTF-8"));
         msg.setPayload(b);
 
         try {
-            mqttHelper.mqttAndroidClient.publish("sensor/RP3", msg);
-
+            mqttHelper.mqttAndroidClient.publish("Topic/" + ID, msg);
         }catch (MqttException ignored){
         }
     }
