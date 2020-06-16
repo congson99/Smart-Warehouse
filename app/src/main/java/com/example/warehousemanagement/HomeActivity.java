@@ -16,6 +16,10 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //Intent from Login
+        Intent intentf = getIntent();
+        String id = intentf.getStringExtra("id");
+
         bt_temp = (Button) findViewById(R.id.home_temp);
 
         bt_temp.setOnClickListener(new View.OnClickListener() {
