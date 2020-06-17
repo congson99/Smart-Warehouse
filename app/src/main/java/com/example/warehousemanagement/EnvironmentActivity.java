@@ -24,6 +24,11 @@ public class EnvironmentActivity extends AppCompatActivity {
 
     private MQTTHelper mqttHelper;
 
+    TextView gps;
+    TextView temphumi;
+    TextView light;
+    TextView mois;
+
     TextView light_show;
     EditText light_state;
     EditText light_value;
@@ -39,6 +44,11 @@ public class EnvironmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_environment);
 
+        gps = (TextView) findViewById(R.id.gps);
+        temphumi = (TextView) findViewById(R.id.temphumi);
+        light = (TextView) findViewById(R.id.light);
+        mois = (TextView) findViewById(R.id.mois);
+
         light_show = (TextView) findViewById(R.id.light_show);
         light_state = (EditText) findViewById(R.id.light_state);
         light_value = (EditText) findViewById(R.id.light_value);
@@ -48,6 +58,11 @@ public class EnvironmentActivity extends AppCompatActivity {
         speak_state = (EditText) findViewById(R.id.speak_state);
         speak_value = (EditText) findViewById(R.id.speak_value);
         bt_speak = (Button) findViewById(R.id.button_speak);
+
+        startMQTT("GPS", "Topic/GPS", gps);
+        startMQTT("TempHumi", "Topic/TempHumi", temphumi);
+        startMQTT("Light", "Topic/Light", light);
+        startMQTT("Mois", "Topic/Mois", mois);
 
         startMQTT("LightD", "Topic/LightD", light_show);
         startMQTT("Speaker", "Topic/Speaker", speak_show);
@@ -129,7 +144,7 @@ public class EnvironmentActivity extends AppCompatActivity {
         payload.put("values", "");
 
         String list = "["+x+value1+x+","+x+value2+x+"]";
-        String a = payload.toString().substring(0,payload.toString().length()-3) + list + "}";
+        String a = "[" + payload.toString().substring(0,payload.toString().length()-3) + list + "}]";
         byte[] b = a.getBytes(Charset.forName("UTF-8"));
         msg.setPayload(b);
 

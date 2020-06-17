@@ -25,6 +25,9 @@ public class LoginActivity extends AppCompatActivity {
     Button bt_login;
     Button bt_register;
 
+    //temp
+    Button demo;
+
     DatabaseReference databaseReference;
 
     @Override
@@ -38,6 +41,17 @@ public class LoginActivity extends AppCompatActivity {
         warn = (TextView) findViewById(R.id.login_warn);
         bt_login = (Button) findViewById(R.id.login_bt_login);
         bt_register = (Button) findViewById(R.id.login_bt_register);
+
+        //temp
+        demo = (Button) findViewById(R.id.demo);
+        demo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, EnvironmentActivity.class);
+                intent.putExtra("id","congson");
+                startActivity(intent);
+            }
+        });
 
         //Clear or setValue
         Intent intentf = getIntent();

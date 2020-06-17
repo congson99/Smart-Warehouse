@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.warehousemanagement">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -18,7 +19,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".ChangePassActivity"></activity>
+        <activity android:name=".ChangeInfoActivity" />
+        <activity android:name=".InfoActivity" />
+        <activity android:name=".WeatherActivity" />
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".EnvironmentActivity" />
         <activity android:name=".HomeActivity" />
 
