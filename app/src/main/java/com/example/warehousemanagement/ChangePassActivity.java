@@ -27,6 +27,7 @@ public class ChangePassActivity extends AppCompatActivity {
     TextView w1;
     TextView w2;
     TextView w3;
+    TextView w;
     Button bt_change;
 
     @Override
@@ -48,6 +49,7 @@ public class ChangePassActivity extends AppCompatActivity {
         w1 = (TextView) findViewById(R.id.changepass_warn1);
         w2 = (TextView) findViewById(R.id.changepass_warn2);
         w3 = (TextView) findViewById(R.id.changepass_warn3);
+        w = (TextView) findViewById(R.id.changepass_warn);
         bt_change = (Button) findViewById(R.id.changepass_bt_change);
 
         //change_button
@@ -82,15 +84,22 @@ public class ChangePassActivity extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         if(!old_pass.getText().toString().equals(dataSnapshot.getValue().toString())){
-                                            w3.setText("Mật khẩu cũ không đúng!");
+                                            if(!old_pass.getText().toString().equals("")){
+                                                w3.setText("Mật khẩu cũ không đúng!");
+                                            }
                                             old_pass.setText("");
                                         }
                                         else {
-                                            databaseReference.setValue(new_pass.getText().toString());
-                                            Intent intent = new Intent(ChangePassActivity.this, InfoActivity.class);
-                                            intent.putExtra("id", id);
-                                            intent.putExtra("warn", "Bạn vừa đổi mật khẩu thành công!");
-                                            startActivity(intent);
+                                            if(old_pass.getText().toString().equals(dataSnapshot.getValue().toString())){
+                                                databaseReference.setValue(new_pass.getText().toString());
+                                                w.setText("Bạn vừa đổi mật khẩu thành công!");
+                                                new_pass.setText("");
+                                                new_passcf.setText("");
+                                                old_pass.setText("");
+                                                w1.setText("");
+                                                w2.setText("");
+                                                w3.setText("");
+                                            }
                                         }
                                     }
 

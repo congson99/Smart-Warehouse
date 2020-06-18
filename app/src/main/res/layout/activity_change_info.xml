@@ -6,4 +6,91 @@
     android:layout_height="match_parent"
     tools:context=".ChangeInfoActivity">
 
+    <ImageView
+        android:id="@+id/changeinfo_image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/changeinfo_bt_takephoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toEndOf="@+id/changeinfo_image"
+        app:layout_constraintTop_toTopOf="@+id/changeinfo_image"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    <ImageButton
+        android:id="@+id/changeinfo_bt_choosephoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toEndOf="@+id/changeinfo_image"
+        app:layout_constraintTop_toBottomOf="@+id/changeinfo_bt_takephoto"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+    <Button
+        android:id="@+id/changeinfo_bt_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Change"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeinfo_location" />
+
+    <EditText
+        android:id="@+id/changeinfo_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeinfo_image" />
+
+    <TextView
+        android:id="@+id/changeinfo_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Loading..."
+        app:layout_constraintEnd_toStartOf="@+id/changeinfo_bt_next"
+        app:layout_constraintStart_toStartOf="@+id/changeinfo_name"
+        app:layout_constraintTop_toBottomOf="@+id/changeinfo_name" />
+
+    <ImageButton
+        android:id="@+id/changeinfo_bt_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/changeinfo_location"
+        app:layout_constraintEnd_toEndOf="@+id/changeinfo_name"
+        app:layout_constraintTop_toTopOf="@+id/changeinfo_location"
+        app:srcCompat="@android:drawable/ic_media_play" />
+
+    <TextView
+        android:id="@+id/changeinfo_warn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeinfo_bt_change" />
+
+    <TextView
+        android:id="@+id/changeinfo_warn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeinfo_name" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

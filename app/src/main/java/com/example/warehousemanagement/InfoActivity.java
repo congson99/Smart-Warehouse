@@ -4,9 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -19,10 +24,10 @@ public class InfoActivity extends AppCompatActivity {
 
     DatabaseReference databaseReference;
 
+    ImageView img;
     TextView tv_id;
     TextView tv_name;
     TextView tv_location;
-    TextView tv_warn;
     Button bt_changeinfo;
     Button bt_changepass;
     Button bt_logout;
@@ -35,13 +40,12 @@ public class InfoActivity extends AppCompatActivity {
         //Intent from Home
         Intent intentf = getIntent();
         final String id = intentf.getStringExtra("id");
-        final String warn = intentf.getStringExtra("warn");
 
         //Anh xa
+        img = (ImageView) findViewById(R.id.info_image);
         tv_id = (TextView) findViewById(R.id.info_id);
         tv_name = (TextView) findViewById(R.id.info_name);
         tv_location = (TextView) findViewById(R.id.info_location);
-        tv_warn = (TextView) findViewById(R.id.info_warn);
         bt_changeinfo = (Button) findViewById(R.id.info_bt_changeinfo);
         bt_changepass = (Button) findViewById(R.id.info_bt_changepass);
         bt_logout = (Button) findViewById(R.id.info_bt_logout);
@@ -63,11 +67,16 @@ public class InfoActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("Account");
 
         //Set value
-        tv_warn.setText(warn);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //Set value
+                img.setImageDrawable(null);
+                if(!dataSnapshot.child(id).child("Avatar").getValue().toString().equals("None")){
+                    byte[] mangGet = Base64.decode(dataSnapshot.child(id).child("Avatar").getValue().toString(), Base64.DEFAULT);
+                    Bitmap bm = BitmapFactory.decodeByteArray(mangGet, 0, mangGet.length);
+                    img.setImageBitmap(bm);
+                }
                 tv_id.setText(id);
                 tv_name.setText(dataSnapshot.child(id).child("Name").getValue().toString());
                 tv_location.setText(locationsarray[Integer.parseInt(dataSnapshot.child("Location").child("Location").getValue().toString())]);
