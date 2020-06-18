@@ -13,6 +13,7 @@ import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,17 +25,9 @@ public class EnvironmentActivity extends AppCompatActivity {
 
     private MQTTHelper mqttHelper;
 
-    TextView gps;
-    TextView temphumi;
-    TextView light;
-    TextView mois;
-
-    TextView light_show;
-    EditText light_state;
-    EditText light_value;
-    Button bt_light;
-
     TextView speak_show;
+    TextView t1;
+    TextView t2;
     EditText speak_state;
     EditText speak_value;
     Button bt_speak;
@@ -44,46 +37,14 @@ public class EnvironmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_environment);
 
-        gps = (TextView) findViewById(R.id.gps);
-        temphumi = (TextView) findViewById(R.id.temphumi);
-        light = (TextView) findViewById(R.id.light);
-        mois = (TextView) findViewById(R.id.mois);
-
-        light_show = (TextView) findViewById(R.id.light_show);
-        light_state = (EditText) findViewById(R.id.light_state);
-        light_value = (EditText) findViewById(R.id.light_value);
-        bt_light = (Button) findViewById(R.id.button_light);
-
         speak_show = (TextView) findViewById(R.id.speak_show);
+        t1 = (TextView) findViewById(R.id.temp1);
+        t2 = (TextView) findViewById(R.id.temp2);
         speak_state = (EditText) findViewById(R.id.speak_state);
         speak_value = (EditText) findViewById(R.id.speak_value);
         bt_speak = (Button) findViewById(R.id.button_speak);
 
-        startMQTT("GPS", "Topic/GPS", gps);
-        startMQTT("TempHumi", "Topic/TempHumi", temphumi);
-        startMQTT("Light", "Topic/Light", light);
-        startMQTT("Mois", "Topic/Mois", mois);
-
-        startMQTT("LightD", "Topic/LightD", light_show);
-        startMQTT("Speaker", "Topic/Speaker", speak_show);
-
-        bt_light.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (!light_state.getText().toString().equals("1")) light_state.setText("0");
-                if (light_value.getText().toString().equals("")) light_value.setText("0");
-
-                try {
-                    sendDataToMQTT("LightD", light_state.getText().toString(), light_value.getText().toString());
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                light_state.setText("");
-                light_value.setText("");
-            }
-        });
+        startMQTTSpeaker("Speaker", "Topic/Speaker", speak_show, t1, t2);
 
         bt_speak.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +52,7 @@ public class EnvironmentActivity extends AppCompatActivity {
 
                 if (!speak_state.getText().toString().equals("1")) speak_state.setText("0");
                 if (speak_value.getText().toString().equals("")) speak_value.setText("0");
+                if (Integer.parseInt(speak_value.getText().toString()) > 5000) speak_value.setText("5000");
 
                 try {
                     sendDataToMQTT("Speaker", speak_state.getText().toString(), speak_value.getText().toString());
@@ -105,7 +67,7 @@ public class EnvironmentActivity extends AppCompatActivity {
 
     }
 
-    private void startMQTT(String ID, String topic, final TextView tv){
+    private void startMQTTSpeaker(String ID, String topic, final TextView tv, final  TextView a,final TextView b){
         mqttHelper = new MQTTHelper(getApplicationContext(), ID, topic);
         mqttHelper.setCallBack(new MqttCallbackExtended() {
             @Override
@@ -122,6 +84,22 @@ public class EnvironmentActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 System.out.println(message.toString());
                 tv.setText(message.toString());
+                JSONArray jsonArray = new JSONArray(message.toString());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String device_id = jsonObject.getString("device_id");
+                    String location = jsonObject.getString("values");
+
+                    JSONArray arr_value = new JSONArray(location);
+                    if (arr_value.getString(0).equals("0")){
+                        a.setText("Off");
+                    }
+                    else {
+                        a.setText("On");
+                    }
+                    b.setText(arr_value.getString(1));
+                }
+
             }
 
             @Override

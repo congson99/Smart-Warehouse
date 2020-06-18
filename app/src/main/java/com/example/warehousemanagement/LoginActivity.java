@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //temp
     Button demo;
+    Button planb;
 
     DatabaseReference databaseReference;
 
@@ -45,6 +46,15 @@ public class LoginActivity extends AppCompatActivity {
         //temp
         demo = (Button) findViewById(R.id.demo);
         demo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, DemoActivity.class);
+                intent.putExtra("id","congson");
+                startActivity(intent);
+            }
+        });
+        planb = (Button) findViewById(R.id.bt_planb);
+        planb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, EnvironmentActivity.class);

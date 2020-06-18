@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChangePassActivity"></activity>
+        <activity android:name=".DemoActivity"></activity>
+        <activity android:name=".ChangePassActivity" />
         <activity android:name=".ChangeInfoActivity" />
         <activity android:name=".InfoActivity" />
         <activity android:name=".WeatherActivity" />
