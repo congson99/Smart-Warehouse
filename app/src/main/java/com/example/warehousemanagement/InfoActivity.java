@@ -71,7 +71,7 @@ public class InfoActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //Set value
-                img.setImageDrawable(null);
+                img.setImageResource(R.drawable.farmericon);
                 if(!dataSnapshot.child(id).child("Avatar").getValue().toString().equals("None")){
                     byte[] mangGet = Base64.decode(dataSnapshot.child(id).child("Avatar").getValue().toString(), Base64.DEFAULT);
                     Bitmap bm = BitmapFactory.decodeByteArray(mangGet, 0, mangGet.length);

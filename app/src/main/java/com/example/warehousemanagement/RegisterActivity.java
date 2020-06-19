@@ -96,9 +96,11 @@ public class RegisterActivity extends AppCompatActivity {
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         //check account exist
                                         if(dataSnapshot.getValue() != null){
-                                            id_w.setText("Tài khoản đã tồn tại!");
-                                            pass.setText("");
-                                            passcf.setText("");
+                                            if(!id.getText().toString().equals("")){
+                                                id_w.setText("Tài khoản đã tồn tại!");
+                                                pass.setText("");
+                                                passcf.setText("");
+                                            }
                                         }
                                         else {
                                             //check pass
@@ -108,22 +110,24 @@ public class RegisterActivity extends AppCompatActivity {
                                                 passcf.setText("");
                                             }
                                             else {
-                                                databaseReference.child(id.getText().toString()).child("Name").setValue(name.getText().toString());
-                                                databaseReference.child(id.getText().toString()).child("Pass").setValue(pass.getText().toString());
-                                                databaseReference.child(id.getText().toString()).child("Avatar").setValue("None");
-                                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                                intent.putExtra("id", id.getText().toString());
-                                                intent.putExtra("pass", pass.getText().toString());
-                                                startActivity(intent);
-                                                //Clear
-                                                id.setText("");
-                                                name.setText("");
-                                                pass.setText("");
-                                                passcf.setText("");
-                                                id_w.setText("");
-                                                name_w.setText("");
-                                                pass_w.setText("");
-                                                passcf_w.setText("");
+                                                if(!id.getText().toString().equals("")){
+                                                    databaseReference.child(id.getText().toString()).child("Name").setValue(name.getText().toString());
+                                                    databaseReference.child(id.getText().toString()).child("Pass").setValue(pass.getText().toString());
+                                                    databaseReference.child(id.getText().toString()).child("Avatar").setValue("None");
+                                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                                    intent.putExtra("id", id.getText().toString());
+                                                    intent.putExtra("pass", pass.getText().toString());
+                                                    startActivity(intent);
+                                                    //Clear
+                                                    id.setText("");
+                                                    name.setText("");
+                                                    pass.setText("");
+                                                    passcf.setText("");
+                                                    id_w.setText("");
+                                                    name_w.setText("");
+                                                    pass_w.setText("");
+                                                    passcf_w.setText("");
+                                                }
 
                                             }
                                         }

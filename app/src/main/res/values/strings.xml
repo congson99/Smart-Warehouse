@@ -1,7 +1,20 @@
 <resources>
     <string name="app_name">Warehouse Management</string>
-    <string name="login">Login</string>
     <string name="xem_thong_so">Xem thong so</string>
     <string name="textview">TextView</string>
     <string name="button">Button</string>
+    <string name="login_name" />
+    <string name="warehouse_logo_name" />
+    <string name="username_name" />
+    <string name="password_name" />
+    <string name="register_name" />
+    <string name="forgot_password_name" />
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="warn">warn</string>
+    <string name="full_name">Full name</string>
+    <string name="confirm_password_name">Confirm password</string>
+    <string name="register">Register</string>
 </resources>

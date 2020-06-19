@@ -25,10 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     Button bt_login;
     Button bt_register;
 
-    //temp
-    Button demo;
-    Button planb;
-
     DatabaseReference databaseReference;
 
     @Override
@@ -43,31 +39,10 @@ public class LoginActivity extends AppCompatActivity {
         bt_login = (Button) findViewById(R.id.login_bt_login);
         bt_register = (Button) findViewById(R.id.login_bt_register);
 
-        //temp
-        demo = (Button) findViewById(R.id.demo);
-        demo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, DemoActivity.class);
-                intent.putExtra("id","congson");
-                startActivity(intent);
-            }
-        });
-        planb = (Button) findViewById(R.id.bt_planb);
-        planb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, EnvironmentActivity.class);
-                intent.putExtra("id","congson");
-                startActivity(intent);
-            }
-        });
-
         //Clear or setValue
         Intent intentf = getIntent();
         id.setText(intentf.getStringExtra("id"));
         pass.setText(intentf.getStringExtra("pass"));
-        warn.setText("");
 
         //Login_button
         bt_login.setOnClickListener(new View.OnClickListener() {

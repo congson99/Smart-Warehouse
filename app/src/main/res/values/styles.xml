@@ -7,4 +7,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CustomToolbarStyle"></style>
+
+    <style name="CustomPopupStyle"></style>
+
 </resources>
