@@ -17,4 +17,11 @@
     <string name="full_name">Full name</string>
     <string name="confirm_password_name">Confirm password</string>
     <string name="register">Register</string>
+    <string name="full_name_profile">Loading...</string>
+    <string name="environment_name">Environment</string>
+    <string name="weather_name">Weather</string>
+    <string name="history_name">History</string>
+    <string name="products">Products</string>
+    <string name="about_us">About us</string>
+    <string name="account">Account</string>
 </resources>
