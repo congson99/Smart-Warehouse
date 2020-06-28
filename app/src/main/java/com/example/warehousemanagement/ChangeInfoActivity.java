@@ -34,13 +34,17 @@ public class ChangeInfoActivity extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
 
-    ImageButton bt_take;
-    ImageButton bt_choose;
+    Button bt_take;
+    Button bt_choose;
     Button bt_change;
     ImageView img;
     EditText name;
+    EditText email;
+    EditText phone;
+    EditText dob;
     TextView location;
     ImageButton bt_next;
+    ImageButton bt_back;
     TextView warn;
     TextView warn1;
 
@@ -52,13 +56,17 @@ public class ChangeInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_info);
 
-        bt_take = (ImageButton) findViewById(R.id.changeinfo_bt_takephoto);
-        bt_choose = (ImageButton) findViewById(R.id.changeinfo_bt_choosephoto);
-        bt_change = (Button) findViewById(R.id.changeinfo_bt_change);
-        img = (ImageView) findViewById(R.id.changeinfo_image);
+        bt_take = (Button) findViewById(R.id.button_change_avatar);
+        bt_choose = (Button) findViewById(R.id.button_remove_avatar);
+        bt_change = (Button) findViewById(R.id.button_save);
+        img = (ImageView) findViewById(R.id.img_avatar_profile);
         name = (EditText) findViewById(R.id.changeinfo_name);
+        email = (EditText) findViewById(R.id.changeinfo_email);
+        phone = (EditText) findViewById(R.id.changeinfo_phone);
+        dob = (EditText) findViewById(R.id.changeinfo_dob);
         location = (TextView) findViewById(R.id.changeinfo_location);
         bt_next = (ImageButton) findViewById(R.id.changeinfo_bt_next);
+        bt_back = (ImageButton) findViewById(R.id.changeinfo_bt_back);
         warn = (TextView) findViewById(R.id.changeinfo_warn);
         warn1 = (TextView) findViewById(R.id.changeinfo_warn1);
 
@@ -94,6 +102,9 @@ public class ChangeInfoActivity extends AppCompatActivity {
                 }
 
                 name.setText(dataSnapshot.child("Account").child(id).child("Name").getValue().toString());
+                email.setText(dataSnapshot.child("Account").child(id).child("Email").getValue().toString());
+                phone.setText(dataSnapshot.child("Account").child(id).child("Phone").getValue().toString());
+                dob.setText(dataSnapshot.child("Account").child(id).child("DOB").getValue().toString());
                 location_temp[0] = Integer.parseInt(dataSnapshot.child("Location").getValue().toString());
                 location.setText(locationsarray[Integer.parseInt(dataSnapshot.child("Location").getValue().toString())]);
             }
@@ -107,8 +118,18 @@ public class ChangeInfoActivity extends AppCompatActivity {
         bt_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                location.setText(locationsarray[(location_temp[0]+1)%11]);
                 location_temp[0]++;
+                if (location_temp[0] > 10) location_temp[0] -= 11;
+                location.setText(locationsarray[(location_temp[0])%11]);
+            }
+        });
+
+        bt_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                location_temp[0]--;
+                if (location_temp[0] < 0) location_temp[0] += 11;
+                location.setText(locationsarray[(location_temp[0])%11]);
             }
         });
 
@@ -144,6 +165,9 @@ public class ChangeInfoActivity extends AppCompatActivity {
                     databaseReference.child("Account").child(id).child("Avatar").setValue(chuoiHinh);
 
                     databaseReference.child("Account").child(id).child("Name").setValue(name.getText().toString());
+                    databaseReference.child("Account").child(id).child("Email").setValue(email.getText().toString());
+                    databaseReference.child("Account").child(id).child("Phone").setValue(phone.getText().toString());
+                    databaseReference.child("Account").child(id).child("DOB").setValue(dob.getText().toString());
                     databaseReference.child("Location").setValue(location_temp[0]%11);
 
                     warn.setText("Bạn vừa đổi thông tin thành công!");
