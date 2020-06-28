@@ -61,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                 passcf_w.setText("");
 
                 //link to Node account
-                databaseReference = FirebaseDatabase.getInstance().getReference("Account");
+                databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("Account");
 
                 //Check null id
                 if (id.getText().toString().equals("")){
@@ -114,6 +114,9 @@ public class RegisterActivity extends AppCompatActivity {
                                                     databaseReference.child(id.getText().toString()).child("Name").setValue(name.getText().toString());
                                                     databaseReference.child(id.getText().toString()).child("Pass").setValue(pass.getText().toString());
                                                     databaseReference.child(id.getText().toString()).child("Avatar").setValue("None");
+                                                    databaseReference.child(id.getText().toString()).child("Email").setValue("Email");
+                                                    databaseReference.child(id.getText().toString()).child("Phone").setValue("Phone Number");
+                                                    databaseReference.child(id.getText().toString()).child("DOB").setValue("DOB");
                                                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                                     intent.putExtra("id", id.getText().toString());
                                                     intent.putExtra("pass", pass.getText().toString());

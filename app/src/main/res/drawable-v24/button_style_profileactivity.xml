@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Mau button khi dang nhan vao   -->
+    <item android:state_pressed="true" >
+        <shape android:shape="rectangle"  >
+            <solid android:color="#C8E9FB" />
+            <padding
+                android:left="20dp"
+                android:right="20dp"/>
+            <corners android:radius="45dp" />
+        </shape>
+    </item>
+    <!-- Mau button mac dinh   -->
+    <item >
+        <shape android:shape="rectangle"  >
+            <padding
+                android:left="20dp"
+                android:right="20dp"/>
+            <corners android:radius="45dp" />
+            <gradient android:angle="-90" android:startColor="#2196F3" android:endColor="#00BCD4" />
+        </shape>
+    </item>
+</selector>

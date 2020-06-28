@@ -20,7 +20,7 @@
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/warehouse_logo_name"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         app:srcCompat="@drawable/warehouse" />
 
     <EditText
@@ -62,8 +62,8 @@
         android:layout_width="120dp"
         android:layout_height="45dp"
         android:layout_below="@id/login_pass"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="57dp"
+        android:layout_alignStart="@+id/login_pass"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/login_button"
         android:fontFamily="sans-serif-medium"
@@ -76,9 +76,9 @@
         android:layout_width="120dp"
         android:layout_height="45dp"
         android:layout_below="@id/login_pass"
-        android:layout_alignParentEnd="true"
+        android:layout_alignEnd="@+id/login_pass"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="57dp"
+        android:layout_marginEnd="2dp"
         android:background="@drawable/corner_register_button"
         android:fontFamily="sans-serif-medium"
         android:text="@string/register"

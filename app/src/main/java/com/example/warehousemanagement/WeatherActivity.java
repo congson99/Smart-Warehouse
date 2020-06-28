@@ -50,7 +50,7 @@ public class WeatherActivity extends AppCompatActivity {
         weather_view = (WebView) findViewById(R.id.weather_webview);
 
         //get location id
-        databaseReference = FirebaseDatabase.getInstance().getReference("Account").child("Location").child("Location");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("Location");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

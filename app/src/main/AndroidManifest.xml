@@ -20,8 +20,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".DemoActivity"></activity>
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".AboutUsActivity"></activity>
+        <activity android:name=".DemoActivity" />
         <activity android:name=".ChangePassActivity" />
         <activity android:name=".ChangeInfoActivity" />
         <activity android:name=".InfoActivity" />

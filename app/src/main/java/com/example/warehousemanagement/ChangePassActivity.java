@@ -40,7 +40,7 @@ public class ChangePassActivity extends AppCompatActivity {
         final String id = intentf.getStringExtra("id");
 
         //Link to Node pass
-        databaseReference = FirebaseDatabase.getInstance().getReference("Account").child(id).child("Pass");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("Account").child(id).child("Pass");
 
         //Anh xa
         new_pass = (EditText) findViewById(R.id.changepass_new_pass);
@@ -56,19 +56,19 @@ public class ChangePassActivity extends AppCompatActivity {
         bt_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Check new pass null
-                if(new_pass.getText().toString().equals("")){
-                    w1.setText("Nhập mật khẩu mới!");
+                //Check old pass null
+                if(old_pass.getText().toString().equals("")){
+                    w3.setText("Nhập mật khẩu cũ!");
                 }
                 else {
-                    //Check new passcf null
-                    if(new_passcf.getText().toString().equals("")){
-                        w2.setText("Nhập lại mật khẩu!");
+                    //Check new pass null
+                    if(new_pass.getText().toString().equals("")){
+                        w1.setText("Nhập mật khẩu mới!");
                     }
                     else {
-                        //Check old pass null
-                        if(old_pass.getText().toString().equals("")){
-                            w3.setText("Nhập mật khẩu cũ!");
+                        //Check new passcf null
+                        if(new_passcf.getText().toString().equals("")){
+                            w2.setText("Nhập lại mật khẩu!");
                         }
                         else {
                             //nothing null

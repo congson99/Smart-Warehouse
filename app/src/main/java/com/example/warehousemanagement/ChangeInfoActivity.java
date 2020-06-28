@@ -82,20 +82,20 @@ public class ChangeInfoActivity extends AppCompatActivity {
 
         final int[] location_temp = new int[1];
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Account");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Main");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 img.setImageResource(R.drawable.farmericon);
-                if(!dataSnapshot.child(id).child("Avatar").getValue().toString().equals("None")){
-                    byte[] mangGet = Base64.decode(dataSnapshot.child(id).child("Avatar").getValue().toString(), Base64.DEFAULT);
+                if(!dataSnapshot.child("Account").child(id).child("Avatar").getValue().toString().equals("None")){
+                    byte[] mangGet = Base64.decode(dataSnapshot.child("Account").child(id).child("Avatar").getValue().toString(), Base64.DEFAULT);
                     Bitmap bm = BitmapFactory.decodeByteArray(mangGet, 0, mangGet.length);
                     img.setImageBitmap(bm);
                 }
 
-                name.setText(dataSnapshot.child(id).child("Name").getValue().toString());
-                location_temp[0] = Integer.parseInt(dataSnapshot.child("Location").child("Location").getValue().toString());
-                location.setText(locationsarray[Integer.parseInt(dataSnapshot.child("Location").child("Location").getValue().toString())]);
+                name.setText(dataSnapshot.child("Account").child(id).child("Name").getValue().toString());
+                location_temp[0] = Integer.parseInt(dataSnapshot.child("Location").getValue().toString());
+                location.setText(locationsarray[Integer.parseInt(dataSnapshot.child("Location").getValue().toString())]);
             }
 
             @Override
@@ -141,10 +141,10 @@ public class ChangeInfoActivity extends AppCompatActivity {
                 else {
                     byte[] hinh = ImageViewToByte(img);
                     String chuoiHinh = Base64.encodeToString(hinh, Base64.DEFAULT);
-                    databaseReference.child(id).child("Avatar").setValue(chuoiHinh);
+                    databaseReference.child("Account").child(id).child("Avatar").setValue(chuoiHinh);
 
-                    databaseReference.child(id).child("Name").setValue(name.getText().toString());
-                    databaseReference.child("Location").child("Location").setValue(location_temp[0]%11);
+                    databaseReference.child("Account").child(id).child("Name").setValue(name.getText().toString());
+                    databaseReference.child("Location").setValue(location_temp[0]%11);
 
                     warn.setText("Bạn vừa đổi thông tin thành công!");
                     warn1.setText("");

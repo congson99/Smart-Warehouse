@@ -28,6 +28,9 @@ public class InfoActivity extends AppCompatActivity {
     TextView tv_id;
     TextView tv_name;
     TextView tv_location;
+    TextView tv_email;
+    TextView tv_phone;
+    TextView tv_dob;
     Button bt_changeinfo;
     Button bt_changepass;
     Button bt_logout;
@@ -42,13 +45,16 @@ public class InfoActivity extends AppCompatActivity {
         final String id = intentf.getStringExtra("id");
 
         //Anh xa
-        img = (ImageView) findViewById(R.id.info_image);
+        img = (ImageView) findViewById(R.id.info_avatar);
         tv_id = (TextView) findViewById(R.id.info_id);
         tv_name = (TextView) findViewById(R.id.info_name);
         tv_location = (TextView) findViewById(R.id.info_location);
-        bt_changeinfo = (Button) findViewById(R.id.info_bt_changeinfo);
-        bt_changepass = (Button) findViewById(R.id.info_bt_changepass);
-        bt_logout = (Button) findViewById(R.id.info_bt_logout);
+        tv_email = (TextView) findViewById(R.id.info_email);
+        tv_phone = (TextView) findViewById(R.id.info_phone);
+        tv_dob = (TextView) findViewById(R.id.info_dob);
+        bt_changeinfo = (Button) findViewById(R.id.profile_acti_btn_update);
+        bt_changepass = (Button) findViewById(R.id.profile_acti_btn_password);
+        bt_logout = (Button) findViewById(R.id.profile_acti_btn_lo);
 
         //List Locations
         final String[] locationsarray = { "Hà Nội",             //0 Ha Noi
@@ -64,7 +70,7 @@ public class InfoActivity extends AppCompatActivity {
                                         "Thủ Dầu Một"};         //10 Thu Dau 1
 
         //link to account info
-        databaseReference = FirebaseDatabase.getInstance().getReference("Account");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Main");
 
         //Set value
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -72,14 +78,18 @@ public class InfoActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //Set value
                 img.setImageResource(R.drawable.farmericon);
-                if(!dataSnapshot.child(id).child("Avatar").getValue().toString().equals("None")){
-                    byte[] mangGet = Base64.decode(dataSnapshot.child(id).child("Avatar").getValue().toString(), Base64.DEFAULT);
+                if(!dataSnapshot.child("Account").child(id).child("Avatar").getValue().toString().equals("None")){
+                    byte[] mangGet = Base64.decode(dataSnapshot.child("Account").child(id).child("Avatar").getValue().toString(), Base64.DEFAULT);
                     Bitmap bm = BitmapFactory.decodeByteArray(mangGet, 0, mangGet.length);
                     img.setImageBitmap(bm);
                 }
                 tv_id.setText(id);
-                tv_name.setText(dataSnapshot.child(id).child("Name").getValue().toString());
-                tv_location.setText(locationsarray[Integer.parseInt(dataSnapshot.child("Location").child("Location").getValue().toString())]);
+                tv_name.setText(dataSnapshot.child("Account").child(id).child("Name").getValue().toString());
+                tv_location.setText(locationsarray[Integer.parseInt(dataSnapshot.child("Location").getValue().toString())]);
+                tv_email.setText(dataSnapshot.child("Account").child(id).child("Email").getValue().toString());
+                tv_phone.setText(dataSnapshot.child("Account").child(id).child("Phone").getValue().toString());
+                tv_dob.setText(dataSnapshot.child("Account").child(id).child("DOB").getValue().toString());
+
             }
 
             @Override

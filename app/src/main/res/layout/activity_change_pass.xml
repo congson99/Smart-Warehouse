@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,97 +8,107 @@
     tools:context=".ChangePassActivity">
 
     <TextView
-        android:id="@+id/changepass_warn2"
+        android:id="@+id/textview_changepass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changepass_new_passcf" />
+        android:text="Change Password"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="30sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"/>
 
-    <EditText
-        android:id="@+id/changepass_new_pass"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="100dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_below="@+id/textview_changepass"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp">
 
-    <EditText
-        android:id="@+id/changepass_new_passcf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="100dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changepass_new_pass" />
+        <EditText
+            android:id="@+id/changepass_old_pass"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:inputType="textPassword"
+            android:background="@drawable/border_edittext_change_pass"
+            android:hint="Current Password"/>
 
-    <Button
-        android:id="@+id/changepass_bt_change"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="100dp"
-        android:text="Change"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changepass_old_pass" />
+        <TextView
+            android:id="@+id/changepass_warn3"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:textColor="#FF0000"
+            android:text=""/>
 
-    <TextView
-        android:id="@+id/changepass_warn1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changepass_new_pass" />
+        <EditText
+            android:id="@+id/changepass_new_pass"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:inputType="textPassword"
+            android:background="@drawable/border_edittext_change_pass"
+            android:hint="New Password"/>
 
-    <TextView
-        android:id="@+id/changepass_warn3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="350dp"
-        android:layout_marginEnd="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/changepass_warn1"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:textColor="#FF0000"
+            android:text=""/>
 
-    <EditText
-        android:id="@+id/changepass_old_pass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="100dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changepass_new_passcf" />
+        <EditText
+            android:id="@+id/changepass_new_passcf"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:inputType="textPassword"
+            android:background="@drawable/border_edittext_change_pass"
+            android:hint="Retype New Password"/>
 
-    <TextView
-        android:id="@+id/changepass_warn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changepass_bt_change" />
+        <TextView
+            android:id="@+id/changepass_warn2"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="20dp"
+            android:textSize="16sp"
+            android:textColor="#FF0000"
+            android:text=""/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/changepass_bt_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_save_change_pass"
+            android:text="Change Password"
+            android:textAllCaps="false"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/changepass_warn"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="40dp"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:textColor="#000000"
+            android:text=""/>
+
+    </LinearLayout>
+</RelativeLayout>

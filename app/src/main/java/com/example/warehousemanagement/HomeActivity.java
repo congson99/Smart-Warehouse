@@ -49,9 +49,10 @@ public class HomeActivity extends AppCompatActivity {
         bt_environment = (CardView) findViewById(R.id.home_acti_environment_card);
         bt_weather = (CardView) findViewById(R.id.home_acti_weather_card);
         bt_account = (CardView) findViewById(R.id.home_acti_account_card);
+        bt_aboutus = (CardView) findViewById(R.id.home_acti_aboutus_card);
 
         //link to account info
-        databaseReference = FirebaseDatabase.getInstance().getReference("Account");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("Account");
 
         //Set value
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -90,7 +91,16 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Intent to Weather
                 Intent intent = new Intent(HomeActivity.this, WeatherActivity.class);
-                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+        });
+
+        //About_us_button
+        bt_aboutus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent to Avatar
+                Intent intent = new Intent(HomeActivity.this, AboutUsActivity.class);
                 startActivity(intent);
             }
         });

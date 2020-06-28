@@ -6,7 +6,8 @@
     android:textAlignment="center"
     app:popupTheme="@style/CustomPopupStyle"
     app:theme="@style/CustomToolbarStyle"
-    app:title="Login"
+    app:title="Warehouse Management"
+    android:fontFamily="@font/roboto_bold"
     app:titleTextColor="#fff">
 
 </androidx.appcompat.widget.Toolbar>

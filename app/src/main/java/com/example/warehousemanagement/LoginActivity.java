@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Link to Node Account
-                databaseReference = FirebaseDatabase.getInstance().getReference("Account").child(id.getText().toString()).child("Pass");
+                databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("Account").child(id.getText().toString()).child("Pass");
                 //Check account
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
