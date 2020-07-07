@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView warn;
     Button bt_login;
     Button bt_register;
-    ImageView test;
+    TextView test;
 
     DatabaseReference databaseReference;
 
@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         warn = (TextView) findViewById(R.id.login_warn);
         bt_login = (Button) findViewById(R.id.login_bt_login);
         bt_register = (Button) findViewById(R.id.login_bt_register);
-        test = (ImageView) findViewById(R.id.imgView_warehouse);
+        test = (TextView) findViewById(R.id.login_tv_forgot);
 
         //Clear or setValue
         Intent intentf = getIntent();

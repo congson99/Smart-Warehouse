@@ -1,5 +1,6 @@
 package com.example.warehousemanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -9,10 +10,15 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
@@ -36,12 +42,16 @@ public class EnvironmentActivity extends AppCompatActivity {
     TextView show_temperature;
     TextView show_humidity;
     TextView show_speaker;
+    TextView best_cel;
 
     TextView warn;
 
     Button bt_save;
-    CardView bt_demo1;
-    CardView bt_demo2;
+    ImageButton pre;
+    ImageButton next;
+    ImageView bt_demo1;
+    ImageView bt_demo2;
+    ImageView refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +66,64 @@ public class EnvironmentActivity extends AppCompatActivity {
         show_temperature = (TextView) findViewById(R.id.environment_show_temperature);
         show_humidity = (TextView) findViewById(R.id.environment_show_humidity);
         show_speaker = (TextView) findViewById(R.id.environment_show_speker);
+        best_cel = (TextView) findViewById(R.id.environment_bestcel);
         warn = (TextView) findViewById(R.id.environment_warn);
         bt_save = (Button) findViewById(R.id.environment_btn_save);
-        bt_demo1 = (CardView) findViewById(R.id.environment_acti_card_temp);
-        bt_demo2 = (CardView) findViewById(R.id.environment_acti_card_bright);
+        pre = (ImageButton) findViewById(R.id.environment_bt_pre);
+        next = (ImageButton) findViewById(R.id.environment_bt_next);
+        bt_demo1 = (ImageView) findViewById(R.id.demo1ne);
+        bt_demo2 = (ImageView) findViewById(R.id.quat);
+        refresh = (ImageView) findViewById(R.id.demo2ne);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("BestTemperature");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                best_cel.setText(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         //Get value and set
-        startMQTTTempHumi("TempHumi", "Topic/TempHumi", show_temperature, show_humidity);
+        startMQTTTempHumi("TempHumi", "Topic/TempHumi", show_temperature, show_humidity, best_cel);
         startMQTTSpeaker("Speaker", "Topic/Speaker", show_speaker);
         warn.setText("");
         show_humidity.setText("");
         show_temperature.setText("");
         show_speaker.setText("");
+        best_cel.setText("");
+
+        //Chang best cel
+        pre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("BestTemperature");
+                String temp = best_cel.getText().toString();
+                int integer = Integer.parseInt(temp) - 1;
+                if (integer < 0) integer = 0;
+                best_cel.setText(String.valueOf(integer));
+                databaseReference.setValue(String.valueOf(integer));
+                startMQTTTempHumi("TempHumi", "Topic/TempHumi", show_temperature, show_humidity, best_cel);
+                startMQTTSpeaker("Speaker", "Topic/Speaker", show_speaker);
+            }
+        });
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("BestTemperature");
+                String temp = best_cel.getText().toString();
+                int integer = Integer.parseInt(temp) + 1;
+                if (integer > 29) integer = 29;
+                best_cel.setText(String.valueOf(integer));
+                databaseReference.setValue(String.valueOf(integer));
+                startMQTTTempHumi("TempHumi", "Topic/TempHumi", show_temperature, show_humidity, best_cel);
+                startMQTTSpeaker("Speaker", "Topic/Speaker", show_speaker);
+            }
+        });
 
         //Save to history
         bt_save.setOnClickListener(new View.OnClickListener() {
@@ -100,9 +156,16 @@ public class EnvironmentActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startMQTTTempHumi("TempHumi", "Topic/TempHumi", show_temperature, show_humidity, best_cel);
+                startMQTTSpeaker("Speaker", "Topic/Speaker", show_speaker);
+            }
+        });
     }
 
-    private void startMQTTTempHumi(String ID, String topic, final  TextView a,final TextView b){
+    private void startMQTTTempHumi(String ID, String topic, final  TextView a,final TextView b, final  TextView cel){
         mqttHelper = new MQTTHelper(getApplicationContext(), ID, topic);
         mqttHelper.setCallBack(new MqttCallbackExtended() {
             @Override
@@ -129,16 +192,16 @@ public class EnvironmentActivity extends AppCompatActivity {
                     a.setText(arr_value.getString(0));
                     b.setText(arr_value.getString(1));
                     float longitude = Float.parseFloat(show_temperature.getText().toString());
-                    if (!a.getText().toString().equals("")){
-                        if(longitude > 70){
+                    if (!a.getText().toString().equals("") && !cel.getText().toString().equals("")){
+                        if(longitude > Integer.parseInt(cel.getText().toString()) + 50){
                             sendDataToMQTT("Speaker", "1", "5000");
                         }
                         else {
-                            if(longitude <= 20){
+                            if(longitude <= Integer.parseInt(cel.getText().toString())){
                                 sendDataToMQTT("Speaker", "0", "1");
                             }
                             else {
-                                String temp = String.valueOf((Integer.parseInt(a.getText().toString())-20)*2*50);
+                                String temp = String.valueOf((Integer.parseInt(a.getText().toString())-Integer.parseInt(cel.getText().toString()))*2*50);
                                 sendDataToMQTT("Speaker", "1", temp);
                             }
                         }
