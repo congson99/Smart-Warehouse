@@ -6,4 +6,129 @@
     android:layout_height="match_parent"
     tools:context=".FanActivity">
 
+    <TextView
+        android:id="@+id/textViewx17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Cường độ:"
+        android:textColor="#FF0000"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewx16"
+        app:layout_constraintStart_toEndOf="@+id/fan_in_oo" />
+
+    <TextView
+        android:id="@+id/textViewx16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:text="Tắt mở:"
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewx10" />
+
+    <TextView
+        android:id="@+id/textViewx8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Data Fan: "
+        android:textColor="#3F51B5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fan_show_speaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="20dp"
+        android:text="loading..."
+        app:layout_constraintStart_toEndOf="@+id/textViewx8"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewx10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="90dp"
+        android:text="Thay đổi giá trị Speaker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewx8" />
+
+    <TextView
+        android:id="@+id/textViewx12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Tắt mở:"
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewx8" />
+
+    <TextView
+        android:id="@+id/fan_show_oo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="20dp"
+        android:text="loading..."
+        app:layout_constraintStart_toEndOf="@+id/textViewx12"
+        app:layout_constraintTop_toBottomOf="@+id/textViewx8" />
+
+    <TextView
+        android:id="@+id/textViewx14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="20dp"
+        android:text="Cường độ:"
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fan_show_speaker" />
+
+    <TextView
+        android:id="@+id/fan_show_cd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="20dp"
+        android:text="loading..."
+        app:layout_constraintStart_toEndOf="@+id/textViewx14"
+        app:layout_constraintTop_toBottomOf="@+id/fan_show_speaker" />
+
+    <EditText
+        android:id="@+id/fan_in_oo"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewx16"
+        app:layout_constraintStart_toEndOf="@+id/textViewx16" />
+
+    <EditText
+        android:id="@+id/fan_in_cd"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewx17"
+        app:layout_constraintStart_toEndOf="@+id/textViewx17" />
+
+    <Button
+        android:id="@+id/fan_bt_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:text="Thay đổi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewx16" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

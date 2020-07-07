@@ -83,7 +83,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
                                         android:fontFamily="@font/roboto_bold"
-                                        android:text="20*C"
+                                        android:text="15*C"
                                         android:textColor="#6A90B5"
                                         android:textSize="20sp" />
 
@@ -114,7 +114,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
                                         android:fontFamily="@font/roboto_bold"
-                                        android:text="25%"
+                                        android:text="75%"
                                         android:textColor="#6A90B5"
                                         android:textSize="20sp" />
 
@@ -145,7 +145,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
                                         android:fontFamily="@font/roboto_bold"
-                                        android:text="35L"
+                                        android:text="Null"
                                         android:textColor="#6A90B5"
                                         android:textSize="20sp" />
 
