@@ -35,7 +35,7 @@
         android:background="@drawable/background_button_change_avatar"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:text=" Take a photo"
+        android:text=" Camera"
         android:layout_toEndOf="@id/img_avatar_profile"
         android:layout_below="@id/textview_profile"
         android:layout_marginTop="40dp"
@@ -48,13 +48,13 @@
         android:background="@drawable/background_button_change_avatar"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:text=" Choose a photo"
+        android:text="  Photo  "
         android:layout_toEndOf="@id/img_avatar_profile"
         android:layout_below="@id/button_change_avatar"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:textAllCaps="false"
-        android:drawableStart="@drawable/ic_photo_camera_black_24dp" />
+        android:drawableStart="@drawable/ic_image_black_24dp" />
 
     <LinearLayout
         android:id="@+id/content_profile"

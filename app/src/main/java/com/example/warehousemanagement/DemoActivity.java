@@ -60,8 +60,10 @@ public class DemoActivity extends AppCompatActivity {
         bt_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(get_nd.getText().toString().equals("")) get_nd.setText("0");
-                if(get_da.getText().toString().equals("")) get_da.setText(show_da.getText().toString());
+                if(get_nd.getText().toString().equals("") && !show_nd.getText().toString().equals("loading...")) get_nd.setText(show_nd.getText().toString());
+                if(get_nd.getText().toString().equals("") && show_nd.getText().toString().equals("loading...")) get_nd.setText("0");
+                if(get_da.getText().toString().equals("") && !show_da.getText().toString().equals("loading...")) get_da.setText(show_da.getText().toString());
+                if(get_da.getText().toString().equals("") && show_da.getText().toString().equals("loading...")) get_da.setText("0");
                 try {
                     sendDataToMQTT("TempHumi", get_nd.getText().toString(), get_da.getText().toString());
                     get_nd.setText("");
@@ -101,15 +103,18 @@ public class DemoActivity extends AppCompatActivity {
                     a.setText(arr_value.getString(0));
                     b.setText(arr_value.getString(1));
                     float longitude = Float.parseFloat(show_nd.getText().toString());
-                    if(longitude > 60.0){
-                        sendDataToMQTT("Speaker", "1", "4500");
-                    }
-                    else {
-                        if(longitude > 30.0){
-                            sendDataToMQTT("Speaker", "1", "2000");
+                    if (!a.getText().toString().equals("")){
+                        if(longitude > 70){
+                            sendDataToMQTT("Speaker", "1", "5000");
                         }
                         else {
-                            sendDataToMQTT("Speaker", "0", "0");
+                            if(longitude <= 20){
+                                sendDataToMQTT("Speaker", "0", "1");
+                            }
+                            else {
+                                String temp = String.valueOf((Integer.parseInt(a.getText().toString())-20)*2*50);
+                                sendDataToMQTT("Speaker", "1", temp);
+                            }
                         }
                     }
                 }

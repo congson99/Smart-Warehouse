@@ -91,10 +91,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="21dp"
-        android:text="@string/forgot_password"
+        android:layout_marginBottom="5dp"
+        android:text="Group 4 | Multi-Disciplinary Project "
         android:textColor="#E2010000"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/login_warn"

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.mik3y:usb-serial-for-android:2.3.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d00b47fa0c90dba3a3b0e7fcc8610df6/jetified-usb-serial-for-android-2.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d00b47fa0c90dba3a3b0e7fcc8610df6/jetified-usb-serial-for-android-2.3.0/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.mik3y/usb-serial-for-android/2.3.0/a364b97de81c91f69c380f09af0d661e701274b8/usb-serial-for-android-2.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

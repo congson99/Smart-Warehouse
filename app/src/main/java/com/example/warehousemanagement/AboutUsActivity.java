@@ -20,7 +20,7 @@ public class AboutUsActivity extends AppCompatActivity {
         weather_view = (WebView) findViewById(R.id.about_webview);
 
         weather_view.setWebViewClient(new WebViewClient());
-        weather_view.loadUrl("https://www.youtube.com/watch?v=ioNng23DkIM");
+        weather_view.loadUrl("https://www.youtube.com/watch?v=6t-MjBazs3o");
 
         WebSettings webSettings = weather_view.getSettings();
         webSettings.setJavaScriptEnabled(true);

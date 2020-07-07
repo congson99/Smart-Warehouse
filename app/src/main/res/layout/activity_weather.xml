@@ -18,12 +18,12 @@
     <TextView
         android:id="@+id/login_tv_forgot"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="25dp"
         android:background="#FFFFFF"
         android:text="Bạn đang xem thời tiết được cung cấp bởi trang"
         android:textAlignment="center"
         android:textColor="#3F51B5"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="35dp"
         android:background="#FFFFFF"
         android:text="accuweather.com"
         android:textAlignment="center"

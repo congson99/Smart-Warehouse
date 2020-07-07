@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="textView22" type="id" />
+    <item name="demo_show_speaker" type="id" />
+    <item name="textView21" type="id" />
+    <item name="textView18" type="id" />
+    <item name="textView16" type="id" />
+    <item name="demo_in_nd" type="id" />
+    <item name="demo_bt_change" type="id" />
+    <item name="textView10" type="id" />
+    <item name="textView8" type="id" />
+    <item name="textView12" type="id" />
+    <item name="demo_show_temphumi" type="id" />
+    <item name="textView14" type="id" />
+    <item name="textView17" type="id" />
+</resources>

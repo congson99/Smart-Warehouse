@@ -50,6 +50,8 @@ public class HomeActivity extends AppCompatActivity {
         bt_weather = (CardView) findViewById(R.id.home_acti_weather_card);
         bt_account = (CardView) findViewById(R.id.home_acti_account_card);
         bt_aboutus = (CardView) findViewById(R.id.home_acti_aboutus_card);
+        bt_products = (CardView) findViewById(R.id.home_acti_products_card);
+        bt_history = (CardView) findViewById(R.id.home_acti_history_card);
 
         //link to account info
         databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("Account");
@@ -85,6 +87,26 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        //History_button
+        bt_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent to Environment
+                Intent intent = new Intent(HomeActivity.this, HistoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Product_button
+        bt_products.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent to Product
+                Intent intent = new Intent(HomeActivity.this, ProductActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //Weather_button
         bt_weather.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,23 +117,23 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        //About_us_button
-        bt_aboutus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Intent to Avatar
-                Intent intent = new Intent(HomeActivity.this, AboutUsActivity.class);
-                startActivity(intent);
-            }
-        });
-
         //Account_button
         bt_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent to Avatar
+                //Intent to Account
                 Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
                 intent.putExtra("id", id);
+                startActivity(intent);
+            }
+        });
+
+        //About_us_button
+        bt_aboutus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent to About Us
+                Intent intent = new Intent(HomeActivity.this, AboutUsActivity.class);
                 startActivity(intent);
             }
         });
