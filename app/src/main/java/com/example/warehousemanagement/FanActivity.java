@@ -53,7 +53,7 @@ public class FanActivity extends AppCompatActivity {
         bt_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(get_oo.getText().toString().equals("") || get_cd.getText().toString().equals("")){
+                if(get_oo.getText().toString().equals("") || get_cd.getText().toString().equals("") || Integer.parseInt(get_oo.getText().toString()) > 1){
                     get_oo.setText("0");
                     get_cd.setText("1");
                 }
