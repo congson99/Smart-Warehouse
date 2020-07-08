@@ -47,8 +47,8 @@ public class EnvironmentActivity extends AppCompatActivity {
     TextView warn;
 
     Button bt_save;
-    ImageButton pre;
-    ImageButton next;
+    ImageView pre;
+    ImageView next;
     ImageView bt_demo1;
     ImageView bt_demo2;
     ImageView refresh;
@@ -69,17 +69,29 @@ public class EnvironmentActivity extends AppCompatActivity {
         best_cel = (TextView) findViewById(R.id.environment_bestcel);
         warn = (TextView) findViewById(R.id.environment_warn);
         bt_save = (Button) findViewById(R.id.environment_btn_save);
-        pre = (ImageButton) findViewById(R.id.environment_bt_pre);
-        next = (ImageButton) findViewById(R.id.environment_bt_next);
+        pre = (ImageView) findViewById(R.id.environment_bt_pre);
+        next = (ImageView) findViewById(R.id.environment_bt_next);
         bt_demo1 = (ImageView) findViewById(R.id.demo1ne);
         bt_demo2 = (ImageView) findViewById(R.id.quat);
         refresh = (ImageView) findViewById(R.id.demo2ne);
 
+        //Clear
+        warn.setText("");
+        show_humidity.setText("");
+        show_temperature.setText("");
+        show_speaker.setText("");
+        best_cel.setText("");
+
+        //Set best cel
         databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("BestTemperature");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                best_cel.setText(dataSnapshot.getValue().toString());
+                if (dataSnapshot.getValue().toString().length() == 1){
+                    best_cel.setText("0"+dataSnapshot.getValue().toString());
+                } else {
+                    best_cel.setText(dataSnapshot.getValue().toString());
+                }
             }
 
             @Override
@@ -91,11 +103,6 @@ public class EnvironmentActivity extends AppCompatActivity {
         //Get value and set
         startMQTTTempHumi("TempHumi", "Topic/TempHumi", show_temperature, show_humidity, best_cel);
         startMQTTSpeaker("Speaker", "Topic/Speaker", show_speaker);
-        warn.setText("");
-        show_humidity.setText("");
-        show_temperature.setText("");
-        show_speaker.setText("");
-        best_cel.setText("");
 
         //Chang best cel
         pre.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +112,11 @@ public class EnvironmentActivity extends AppCompatActivity {
                 String temp = best_cel.getText().toString();
                 int integer = Integer.parseInt(temp) - 1;
                 if (integer < 0) integer = 0;
-                best_cel.setText(String.valueOf(integer));
+                if (String.valueOf(integer).length() == 1){
+                    best_cel.setText("0"+String.valueOf(integer));
+                } else {
+                    best_cel.setText(String.valueOf(integer));
+                }
                 databaseReference.setValue(String.valueOf(integer));
                 startMQTTTempHumi("TempHumi", "Topic/TempHumi", show_temperature, show_humidity, best_cel);
                 startMQTTSpeaker("Speaker", "Topic/Speaker", show_speaker);
@@ -118,7 +129,11 @@ public class EnvironmentActivity extends AppCompatActivity {
                 String temp = best_cel.getText().toString();
                 int integer = Integer.parseInt(temp) + 1;
                 if (integer > 29) integer = 29;
-                best_cel.setText(String.valueOf(integer));
+                if (String.valueOf(integer).length() == 1){
+                    best_cel.setText("0"+String.valueOf(integer));
+                } else {
+                    best_cel.setText(String.valueOf(integer));
+                }
                 databaseReference.setValue(String.valueOf(integer));
                 startMQTTTempHumi("TempHumi", "Topic/TempHumi", show_temperature, show_humidity, best_cel);
                 startMQTTSpeaker("Speaker", "Topic/Speaker", show_speaker);
@@ -132,11 +147,11 @@ public class EnvironmentActivity extends AppCompatActivity {
                 databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("History");
                 Date date = new Date();
                 if (!show_temperature.getText().toString().equals("") && !show_humidity.getText().toString().equals("") && !show_speaker.getText().toString().equals("")){
-                    databaseReference.child(String.valueOf(date.getTime())+id+" đã lưu giá trị:").setValue("Temperature: "+ show_humidity.getText() + " oC - Humidity: "+show_humidity.getText()+" %\nFan: "+show_speaker.getText()+" %");
+                    databaseReference.child(String.valueOf(date.getTime())+id+" saved values:").setValue("Temperature: "+ show_humidity.getText() + " *C - Humidity: "+show_humidity.getText()+" %\nFan: "+show_speaker.getText()+" % - Standard Temperature: "+best_cel.getText().toString()+" *C");
                     String temp = (String) android.text.format.DateFormat.format("dd-MM-yyyy hh:mm:ss", Long.parseLong(String.valueOf(date.getTime())));
-                    warn.setText("Bạn đã lưu lịch sử lúc " + temp);
+                    warn.setText("You have saved to history at " + temp);
                 }else {
-                    warn.setText("Giá trị không hợp lệ!\nKhông thể lưu!");
+                    warn.setText("The value is not valid!");
                 }
             }
         });
@@ -181,7 +196,6 @@ public class EnvironmentActivity extends AppCompatActivity {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 System.out.println(message.toString());
-//                tv.setText(message.toString());
                 JSONArray jsonArray = new JSONArray(message.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -191,7 +205,7 @@ public class EnvironmentActivity extends AppCompatActivity {
                     JSONArray arr_value = new JSONArray(location);
                     a.setText(arr_value.getString(0));
                     b.setText(arr_value.getString(1));
-                    float longitude = Float.parseFloat(show_temperature.getText().toString());
+                    float longitude = Float.parseFloat(a.getText().toString());
                     if (!a.getText().toString().equals("") && !cel.getText().toString().equals("")){
                         if(longitude > Integer.parseInt(cel.getText().toString()) + 50){
                             sendDataToMQTT("Speaker", "1", "5000");

@@ -58,23 +58,31 @@ public class ChangePassActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Check old pass null
                 if(old_pass.getText().toString().equals("")){
-                    w3.setText("Nhập mật khẩu cũ!");
+                    w3.setText("Enter your current password!");
+                    w1.setText("");
+                    w2.setText("");
                 }
                 else {
                     //Check new pass null
                     if(new_pass.getText().toString().equals("")){
-                        w1.setText("Nhập mật khẩu mới!");
+                        w1.setText("Enter new password!");
+                        w2.setText("");
+                        w3.setText("");
                     }
                     else {
                         //Check new passcf null
                         if(new_passcf.getText().toString().equals("")){
-                            w2.setText("Nhập lại mật khẩu!");
+                            w2.setText("Enter the new password again!");
+                            w1.setText("");
+                            w3.setText("");
                         }
                         else {
                             //nothing null
                             //Check pass
                             if(!new_pass.getText().toString().equals(new_passcf.getText().toString())){
                                 w2.setText("Mật khẩu không trùng khớp!");
+                                w1.setText("");
+                                w3.setText("");
                                 new_pass.setText("");
                                 new_passcf.setText("");
                             }
@@ -85,14 +93,16 @@ public class ChangePassActivity extends AppCompatActivity {
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         if(!old_pass.getText().toString().equals(dataSnapshot.getValue().toString())){
                                             if(!old_pass.getText().toString().equals("")){
-                                                w3.setText("Mật khẩu cũ không đúng!");
+                                                w3.setText("Password does not match!");
+                                                w1.setText("");
+                                                w2.setText("");
                                             }
                                             old_pass.setText("");
                                         }
                                         else {
                                             if(old_pass.getText().toString().equals(dataSnapshot.getValue().toString())){
                                                 databaseReference.setValue(new_pass.getText().toString());
-                                                w.setText("Bạn vừa đổi mật khẩu thành công!");
+                                                w.setText("You have just changed your password!");
                                                 new_pass.setText("");
                                                 new_passcf.setText("");
                                                 old_pass.setText("");

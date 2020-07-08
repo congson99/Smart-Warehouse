@@ -67,35 +67,43 @@ public class LoginActivity extends AppCompatActivity {
                 //Link to Node Account
                 databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("Account").child(id.getText().toString()).child("Pass");
                 //Check account
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        //Check account exist
-                        if(dataSnapshot.getValue() != null) {
-                            //check password
-                            if(dataSnapshot.getValue().toString().equals(pass.getText().toString())){
-                                //Move to home
-                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                intent.putExtra("id",id.getText().toString());
-                                startActivity(intent);
-                                pass.setText("");
-                                warn.setText("");
+                if (id.getText().toString().equals("")){
+                    warn.setText("Enter your ID!");
+                }else {
+                    if (pass.getText().toString().equals("")){
+                        warn.setText("Enter your password!");
+                    }else {
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                //Check account exist
+                                if(dataSnapshot.getValue() != null) {
+                                    //check password
+                                    if(dataSnapshot.getValue().toString().equals(pass.getText().toString())){
+                                        //Move to home
+                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                        intent.putExtra("id",id.getText().toString());
+                                        startActivity(intent);
+                                        pass.setText("");
+                                        warn.setText("");
+                                    }
+                                    else {
+                                        warn.setText("Wrong password!");
+                                        pass.setText("");
+                                    }
+                                }
+                                else {
+                                    warn.setText("Account does not exist!");
+                                    pass.setText("");
+                                }
                             }
-                            else {
-                                warn.setText("Sai mật khẩu!");
-                                pass.setText("");
-                            }
-                        }
-                        else {
-                            warn.setText("Tài khoản không tồn tại!");
-                            pass.setText("");
-                        }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        });
                     }
-                });
+                }
             }
         });
 

@@ -65,28 +65,28 @@ public class RegisterActivity extends AppCompatActivity {
 
                 //Check null id
                 if (id.getText().toString().equals("")){
-                    id_w.setText("Nhập ID là bắt buộc!");
+                    id_w.setText("Enter ID!");
                     pass.setText("");
                     passcf.setText("");
                 }
                 else {
                     //check null name
                     if(name.getText().toString().equals("")){
-                        name_w.setText(" Nhập tên là bắt buộc!");
+                        name_w.setText("Enter your name!");
                         pass.setText("");
                         passcf.setText("");
                     }
                     else {
                         //check pass
                         if (pass.getText().toString().equals("")){
-                            pass_w.setText("Nhập mật khẩu");
+                            pass_w.setText("Enter password!");
                             passcf.setText("");
                         }
                         else {
                             //check passcf
                             if (passcf.getText().toString().equals(""))
                             {
-                                passcf_w.setText("Nhập lại mật khẩu");
+                                passcf_w.setText("Enter the password again!");
                                 pass.setText("");
                             }
                             else {
@@ -97,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         //check account exist
                                         if(dataSnapshot.getValue() != null){
                                             if(!id.getText().toString().equals("")){
-                                                id_w.setText("Tài khoản đã tồn tại!");
+                                                id_w.setText("This account already exists!");
                                                 pass.setText("");
                                                 passcf.setText("");
                                             }
@@ -105,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         else {
                                             //check pass
                                             if(!pass.getText().toString().equals(passcf.getText().toString())){
-                                                passcf_w.setText("Mật khẩu không trùng khớp!");
+                                                passcf_w.setText("Password does not match!");
                                                 pass.setText("");
                                                 passcf.setText("");
                                             }

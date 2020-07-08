@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/home_circle_img_avt"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:text="@string/full_name_profile"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"

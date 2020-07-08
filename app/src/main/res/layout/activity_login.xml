@@ -68,6 +68,7 @@
         android:background="@drawable/login_button"
         android:fontFamily="sans-serif-medium"
         android:text="@string/login"
+        android:textColor="#FFFFFF"
         android:textAllCaps="false"
         android:textSize="18sp" />
 
@@ -82,6 +83,7 @@
         android:background="@drawable/corner_register_button"
         android:fontFamily="sans-serif-medium"
         android:text="@string/register"
+        android:textColor="#FFFFFF"
         android:textAllCaps="false"
         android:textSize="18sp" />
 
@@ -92,13 +94,14 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
-        android:text="Group 4 | Multi-Disciplinary Project "
+        android:text="Group 4 | Multi-Disciplinary Project"
         android:textColor="#E2010000"
         android:textSize="15sp" />
 
     <TextView
         android:id="@+id/login_warn"
-        android:textColor="#FF0000"
+        android:textColor="#DB6204"
+        android:fontFamily="@font/roboto_bold"
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -43,8 +43,8 @@ public class ChangeInfoActivity extends AppCompatActivity {
     EditText phone;
     EditText dob;
     TextView location;
-    ImageButton bt_next;
-    ImageButton bt_back;
+    ImageView bt_next;
+    ImageView bt_back;
     TextView warn;
     TextView warn1;
 
@@ -65,8 +65,8 @@ public class ChangeInfoActivity extends AppCompatActivity {
         phone = (EditText) findViewById(R.id.changeinfo_phone);
         dob = (EditText) findViewById(R.id.changeinfo_dob);
         location = (TextView) findViewById(R.id.changeinfo_location);
-        bt_next = (ImageButton) findViewById(R.id.changeinfo_bt_next);
-        bt_back = (ImageButton) findViewById(R.id.changeinfo_bt_back);
+        bt_next = (ImageView) findViewById(R.id.changeinfo_bt_next);
+        bt_back = (ImageView) findViewById(R.id.changeinfo_bt_back);
         warn = (TextView) findViewById(R.id.changeinfo_warn);
         warn1 = (TextView) findViewById(R.id.changeinfo_warn1);
 
@@ -76,7 +76,8 @@ public class ChangeInfoActivity extends AppCompatActivity {
         warn.setText("");
         warn1.setText("");
 
-        final String[] locationsarray = { "Hà Nội",             //0 Ha Noi
+        final String[] locationsarray = {
+                "Hà Nội",               //0 Ha Noi
                 "Hồ Chí Minh",          //1 Ho Chi Minh
                 "Đà Nẵng",              //2 Da Nang
                 "Hải Phòng",            //3 Hai Phong
@@ -156,7 +157,7 @@ public class ChangeInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(name.getText().toString().equals("")){
-                    warn1.setText("Nhập tên!");
+                    warn1.setText("Enter your name!");
                     warn.setText("");
                 }
                 else {
@@ -170,7 +171,7 @@ public class ChangeInfoActivity extends AppCompatActivity {
                     databaseReference.child("Account").child(id).child("DOB").setValue(dob.getText().toString());
                     databaseReference.child("Location").setValue(location_temp[0]%11);
 
-                    warn.setText("Bạn vừa đổi thông tin thành công!");
+                    warn.setText("You have successfully changed information!");
                     warn1.setText("");
                 }
             }

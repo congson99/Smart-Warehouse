@@ -78,6 +78,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_person_black_smalldp" />
 
             <EditText
@@ -93,7 +94,7 @@
         <TextView
             android:id="@+id/changeinfo_warn1"
             android:layout_width="wrap_content"
-            android:layout_height="15dp"
+            android:layout_height="20dp"
             android:textSize="15sp"
             android:layout_marginTop="0dp"
             android:layout_gravity="center_horizontal"
@@ -107,6 +108,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_email_black_24dp"/>
             <EditText
                 android:id="@+id/changeinfo_email"
@@ -127,6 +129,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_phone_android_black_24dp"/>
             <EditText
                 android:id="@+id/changeinfo_phone"
@@ -147,10 +150,12 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_cake_black_24dp"/>
             <EditText
                 android:id="@+id/changeinfo_dob"
                 android:textStyle="bold"
+                android:gravity="center_vertical"
                 android:layout_gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -167,13 +172,16 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_location_city_black_24dp"/>
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/changeinfo_bt_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/ic_media_previous"/>
+                android:layout_marginStart="20dp"
+                android:layout_width="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="40dp"
+                android:src="@drawable/pre"/>
 
             <TextView
                 android:id="@+id/changeinfo_location"
@@ -187,11 +195,12 @@
                 android:paddingEnd="20dp"
                 android:text="Loading..."/>
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/changeinfo_bt_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/ic_media_next"/>
+                android:layout_gravity="center_vertical"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/next"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -206,6 +215,7 @@
         android:background="@drawable/button_save_change_pass"
         android:fontFamily="sans-serif-medium"
         android:text="SAVE"
+        android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
     <TextView
@@ -213,9 +223,10 @@
         android:layout_width="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_height="wrap_content"
-        android:textColor="#000000"
+        android:textColor="#3F51B5"
+        android:fontFamily="@font/roboto_bold"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/button_save"
-        android:textSize="20sp"/>
+        android:textSize="14sp"/>
 
 </RelativeLayout>
