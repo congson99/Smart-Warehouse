@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 intent.putExtra("id","congson");
                 startActivity(intent);
+                Toast.makeText(LoginActivity.this, "Test mode", Toast.LENGTH_LONG).show();
                 pass.setText("");
                 warn.setText("");
             }
@@ -68,10 +70,10 @@ public class LoginActivity extends AppCompatActivity {
                 databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("Account").child(id.getText().toString()).child("Pass");
                 //Check account
                 if (id.getText().toString().equals("")){
-                    warn.setText("Enter your ID!");
+                    id.setError("Enter your ID!");
                 }else {
                     if (pass.getText().toString().equals("")){
-                        warn.setText("Enter your password!");
+                        pass.setError("Enter your password!");
                     }else {
                         databaseReference.addValueEventListener(new ValueEventListener() {
                             @Override
@@ -86,14 +88,15 @@ public class LoginActivity extends AppCompatActivity {
                                         startActivity(intent);
                                         pass.setText("");
                                         warn.setText("");
+                                        Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_LONG).show();
                                     }
                                     else {
-                                        warn.setText("Wrong password!");
+                                        pass.setError("Wrong password!");
                                         pass.setText("");
                                     }
                                 }
                                 else {
-                                    warn.setText("Account does not exist!");
+                                    id.setError("This account does not exist!");
                                     pass.setText("");
                                 }
                             }

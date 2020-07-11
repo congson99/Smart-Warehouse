@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -65,28 +66,28 @@ public class RegisterActivity extends AppCompatActivity {
 
                 //Check null id
                 if (id.getText().toString().equals("")){
-                    id_w.setText("Enter ID!");
+                    id.setError("Enter ID!");
                     pass.setText("");
                     passcf.setText("");
                 }
                 else {
                     //check null name
                     if(name.getText().toString().equals("")){
-                        name_w.setText("Enter your name!");
+                        name.setError("Enter your name!");
                         pass.setText("");
                         passcf.setText("");
                     }
                     else {
                         //check pass
                         if (pass.getText().toString().equals("")){
-                            pass_w.setText("Enter password!");
+                            pass.setError("Enter password!");
                             passcf.setText("");
                         }
                         else {
                             //check passcf
                             if (passcf.getText().toString().equals(""))
                             {
-                                passcf_w.setText("Enter the password again!");
+                                passcf.setError("Enter the password again!");
                                 pass.setText("");
                             }
                             else {
@@ -97,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         //check account exist
                                         if(dataSnapshot.getValue() != null){
                                             if(!id.getText().toString().equals("")){
-                                                id_w.setText("This account already exists!");
+                                                id.setError("This account already exists!");
                                                 pass.setText("");
                                                 passcf.setText("");
                                             }
@@ -105,7 +106,8 @@ public class RegisterActivity extends AppCompatActivity {
                                         else {
                                             //check pass
                                             if(!pass.getText().toString().equals(passcf.getText().toString())){
-                                                passcf_w.setText("Password does not match!");
+                                                pass.setError("Password does not match!");
+                                                passcf.setError("Password does not match!");
                                                 pass.setText("");
                                                 passcf.setText("");
                                             }
@@ -121,6 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                     intent.putExtra("id", id.getText().toString());
                                                     intent.putExtra("pass", pass.getText().toString());
                                                     startActivity(intent);
+                                                    Toast.makeText(RegisterActivity.this, "Registered successfully", Toast.LENGTH_LONG).show();
                                                     //Clear
                                                     id.setText("");
                                                     name.setText("");

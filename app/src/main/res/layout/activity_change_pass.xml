@@ -36,20 +36,11 @@
             android:background="@drawable/border_edittext_change_pass"
             android:hint="Current Password"/>
 
-        <TextView
-            android:id="@+id/changepass_warn3"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_gravity="center_horizontal"
-            android:textSize="16sp"
-            android:textColor="#FF0000"
-            android:text=""/>
-
         <EditText
             android:id="@+id/changepass_new_pass"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:paddingStart="15dp"
@@ -58,20 +49,11 @@
             android:background="@drawable/border_edittext_change_pass"
             android:hint="New Password"/>
 
-        <TextView
-            android:id="@+id/changepass_warn1"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_gravity="center_horizontal"
-            android:textSize="16sp"
-            android:textColor="#FF0000"
-            android:text=""/>
-
         <EditText
             android:id="@+id/changepass_new_passcf"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:paddingStart="15dp"
@@ -80,37 +62,17 @@
             android:background="@drawable/border_edittext_change_pass"
             android:hint="Retype New Password"/>
 
-        <TextView
-            android:id="@+id/changepass_warn2"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="20dp"
-            android:textSize="16sp"
-            android:textColor="#FF0000"
-            android:text=""/>
-
         <Button
             android:id="@+id/changepass_bt_change"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/button_save_change_pass"
             android:text="Change Password"
             android:textColor="#FFFFFF"
             android:textAllCaps="false"
             android:textSize="18sp"/>
-
-        <TextView
-            android:id="@+id/changepass_warn"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="40dp"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            android:textColor="#5C00FF"
-            android:fontFamily="@font/roboto_bold"
-            android:text=""/>
 
     </LinearLayout>
 </RelativeLayout>

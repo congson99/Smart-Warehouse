@@ -91,17 +91,10 @@
                 android:text="Loading..."
                 android:textStyle="bold" />
         </LinearLayout>
-        <TextView
-            android:id="@+id/changeinfo_warn1"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:textSize="15sp"
-            android:layout_marginTop="0dp"
-            android:layout_gravity="center_horizontal"
-            android:textColor="#FF0000"/>
+
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="15dp"
             android:paddingLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -217,16 +210,5 @@
         android:text="SAVE"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/changeinfo_warn"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_height="wrap_content"
-        android:textColor="#3F51B5"
-        android:fontFamily="@font/roboto_bold"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/button_save"
-        android:textSize="14sp"/>
 
 </RelativeLayout>

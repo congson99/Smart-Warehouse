@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,10 +25,6 @@ public class ChangePassActivity extends AppCompatActivity {
     EditText new_pass;
     EditText new_passcf;
     EditText old_pass;
-    TextView w1;
-    TextView w2;
-    TextView w3;
-    TextView w;
     Button bt_change;
 
     @Override
@@ -46,10 +43,6 @@ public class ChangePassActivity extends AppCompatActivity {
         new_pass = (EditText) findViewById(R.id.changepass_new_pass);
         new_passcf = (EditText) findViewById(R.id.changepass_new_passcf);
         old_pass = (EditText) findViewById(R.id.changepass_old_pass);
-        w1 = (TextView) findViewById(R.id.changepass_warn1);
-        w2 = (TextView) findViewById(R.id.changepass_warn2);
-        w3 = (TextView) findViewById(R.id.changepass_warn3);
-        w = (TextView) findViewById(R.id.changepass_warn);
         bt_change = (Button) findViewById(R.id.changepass_bt_change);
 
         //change_button
@@ -58,31 +51,24 @@ public class ChangePassActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Check old pass null
                 if(old_pass.getText().toString().equals("")){
-                    w3.setText("Enter your current password!");
-                    w1.setText("");
-                    w2.setText("");
+                    old_pass.setError("Enter your current password!");
                 }
                 else {
                     //Check new pass null
                     if(new_pass.getText().toString().equals("")){
-                        w1.setText("Enter new password!");
-                        w2.setText("");
-                        w3.setText("");
+                        new_pass.setError("Enter new password!");
                     }
                     else {
                         //Check new passcf null
                         if(new_passcf.getText().toString().equals("")){
-                            w2.setText("Enter the new password again!");
-                            w1.setText("");
-                            w3.setText("");
+                            new_passcf.setError("Enter the new password again!");
                         }
                         else {
                             //nothing null
                             //Check pass
                             if(!new_pass.getText().toString().equals(new_passcf.getText().toString())){
-                                w2.setText("Mật khẩu không trùng khớp!");
-                                w1.setText("");
-                                w3.setText("");
+                                new_pass.setError("Password does not match!");
+                                new_passcf.setError("Password does not match!");
                                 new_pass.setText("");
                                 new_passcf.setText("");
                             }
@@ -93,22 +79,17 @@ public class ChangePassActivity extends AppCompatActivity {
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         if(!old_pass.getText().toString().equals(dataSnapshot.getValue().toString())){
                                             if(!old_pass.getText().toString().equals("")){
-                                                w3.setText("Password does not match!");
-                                                w1.setText("");
-                                                w2.setText("");
+                                                old_pass.setError("Wrong Password");
                                             }
                                             old_pass.setText("");
                                         }
                                         else {
                                             if(old_pass.getText().toString().equals(dataSnapshot.getValue().toString())){
                                                 databaseReference.setValue(new_pass.getText().toString());
-                                                w.setText("You have just changed your password!");
+                                                Toast.makeText(ChangePassActivity.this, "Change successful!", Toast.LENGTH_LONG).show();
                                                 new_pass.setText("");
                                                 new_passcf.setText("");
                                                 old_pass.setText("");
-                                                w1.setText("");
-                                                w2.setText("");
-                                                w3.setText("");
                                             }
                                         }
                                     }

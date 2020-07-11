@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,8 +46,6 @@ public class ChangeInfoActivity extends AppCompatActivity {
     TextView location;
     ImageView bt_next;
     ImageView bt_back;
-    TextView warn;
-    TextView warn1;
 
     int REQUEST_CODE = 1;
     Integer PHOTO = 0;
@@ -67,14 +66,9 @@ public class ChangeInfoActivity extends AppCompatActivity {
         location = (TextView) findViewById(R.id.changeinfo_location);
         bt_next = (ImageView) findViewById(R.id.changeinfo_bt_next);
         bt_back = (ImageView) findViewById(R.id.changeinfo_bt_back);
-        warn = (TextView) findViewById(R.id.changeinfo_warn);
-        warn1 = (TextView) findViewById(R.id.changeinfo_warn1);
 
         final Intent intent = getIntent();
         final String id = intent.getStringExtra("id");
-
-        warn.setText("");
-        warn1.setText("");
 
         final String[] locationsarray = {
                 "Hà Nội",               //0 Ha Noi
@@ -157,8 +151,7 @@ public class ChangeInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(name.getText().toString().equals("")){
-                    warn1.setText("Enter your name!");
-                    warn.setText("");
+                    name.setError("Enter your name!");
                 }
                 else {
                     byte[] hinh = ImageViewToByte(img);
@@ -171,8 +164,7 @@ public class ChangeInfoActivity extends AppCompatActivity {
                     databaseReference.child("Account").child(id).child("DOB").setValue(dob.getText().toString());
                     databaseReference.child("Location").setValue(location_temp[0]%11);
 
-                    warn.setText("You have successfully changed information!");
-                    warn1.setText("");
+                    Toast.makeText(ChangeInfoActivity.this, "Change successful!", Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,8 +45,6 @@ public class EnvironmentActivity extends AppCompatActivity {
     TextView show_speaker;
     TextView best_cel;
 
-    TextView warn;
-
     Button bt_save;
     ImageView pre;
     ImageView next;
@@ -67,7 +66,6 @@ public class EnvironmentActivity extends AppCompatActivity {
         show_humidity = (TextView) findViewById(R.id.environment_show_humidity);
         show_speaker = (TextView) findViewById(R.id.environment_show_speker);
         best_cel = (TextView) findViewById(R.id.environment_bestcel);
-        warn = (TextView) findViewById(R.id.environment_warn);
         bt_save = (Button) findViewById(R.id.environment_btn_save);
         pre = (ImageView) findViewById(R.id.environment_bt_pre);
         next = (ImageView) findViewById(R.id.environment_bt_next);
@@ -76,7 +74,6 @@ public class EnvironmentActivity extends AppCompatActivity {
         refresh = (ImageView) findViewById(R.id.demo2ne);
 
         //Clear
-        warn.setText("");
         show_humidity.setText("");
         show_temperature.setText("");
         show_speaker.setText("");
@@ -149,9 +146,9 @@ public class EnvironmentActivity extends AppCompatActivity {
                 if (!show_temperature.getText().toString().equals("") && !show_humidity.getText().toString().equals("") && !show_speaker.getText().toString().equals("")){
                     databaseReference.child(String.valueOf(date.getTime())+id+" saved values:").setValue("Temperature: "+ show_humidity.getText() + " *C - Humidity: "+show_humidity.getText()+" %\nFan: "+show_speaker.getText()+" % - Standard Temperature: "+best_cel.getText().toString()+" *C");
                     String temp = (String) android.text.format.DateFormat.format("dd-MM-yyyy hh:mm:ss", Long.parseLong(String.valueOf(date.getTime())));
-                    warn.setText("You have saved to history at " + temp);
+                    Toast.makeText(EnvironmentActivity.this, "You have saved to history\nat " + temp, Toast.LENGTH_LONG).show();
                 }else {
-                    warn.setText("The value is not valid!");
+                    Toast.makeText(EnvironmentActivity.this, "The value is not valid!", Toast.LENGTH_LONG).show();
                 }
             }
         });
