@@ -39,3 +39,21 @@ Hệ thống dự án gồm có 5 thành phần sau:
 Các thành phần sẽ kết hợp với nhau như hình dưới đây để tạo thành một hệ thống hoàn chỉnh.
 
 ![](https://scontent.fvca1-2.fna.fbcdn.net/v/t1.15752-9/109051684_734800797271173_8556610505957094046_n.png?_nc_cat=104&_nc_sid=ae9488&_nc_ohc=-GUEsBig_VsAX_SPFaq&_nc_ht=scontent.fvca1-2.fna&oh=c497b76455da61f75e0d7bb216da4fbf&oe=5F35DDC2)
+
+## Mô tả chi tiết
+### Đăng nhập và đăng ký
+
+Ngay khi mở ứng dụng, ta sẽ được đưa tới màn hình đăng nhập. Nếu đã có tài khoản, ta sẽ nhập tài khoản và nhấn đăng nhập.
+
+Ứng dụng sẽ kiểm tra xem ta đã nhập đúng yêu cầu chưa. Nếu đúng ứng dụng sẽ truy cập vào Database và kiểm tra xem tài khoản và mật khẩu có đúng hay không. Nếu đúng, đăng nhập thành công. Nếu sai, ứng dụng sẽ báo lỗi cụ thể để người dùng kiểm tra.
+
+![](https://scontent.fvca1-2.fna.fbcdn.net/v/t1.15752-9/109014116_2481252698834665_1348439733629559756_n.png?_nc_cat=101&_nc_sid=ae9488&_nc_ohc=WMHYrpuqS0UAX_xuJfq&_nc_ht=scontent.fvca1-2.fna&oh=cb7744480f568173a94f209bd6862df6&oe=5F33CD8C)
+
+Nếu chưa có tài khoản, ta sẽ bấm nút đăng kí và ứng dụng sẽ chuyển đến màn hình đăng kí.
+
+![](https://scontent.fvca1-1.fna.fbcdn.net/v/t1.15752-9/107734806_308129543570024_6502924941859991031_n.png?_nc_cat=106&_nc_sid=ae9488&_nc_ohc=2r3WII6-sdkAX9bGn4I&_nc_ht=scontent.fvca1-1.fna&oh=8844d0fbc8cb9254d7966f523c0d52a0&oe=5F33A405)
+
+Sau khi được đưa đến màn hình đăng kí, ta thực hiện nhập các thông tin và nhấn đăng kí.
+
+### Trang chủ
+
