@@ -159,6 +159,7 @@ public class EnvironmentActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(EnvironmentActivity.this, DemoActivity.class);
                 startActivity(intent);
+                Toast.makeText(EnvironmentActivity.this, "Test mode", Toast.LENGTH_LONG).show();
             }
         });
         bt_demo2.setOnClickListener(new View.OnClickListener() {
@@ -166,6 +167,7 @@ public class EnvironmentActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(EnvironmentActivity.this, FanActivity.class);
                 startActivity(intent);
+                Toast.makeText(EnvironmentActivity.this, "Test mode", Toast.LENGTH_LONG).show();
             }
         });
         refresh.setOnClickListener(new View.OnClickListener() {
@@ -173,6 +175,7 @@ public class EnvironmentActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startMQTTTempHumi("TempHumi", "Topic/TempHumi", show_temperature, show_humidity, best_cel);
                 startMQTTSpeaker("Speaker", "Topic/Speaker", show_speaker);
+                Toast.makeText(EnvironmentActivity.this, "Refreshed successfully", Toast.LENGTH_LONG).show();
             }
         });
     }
