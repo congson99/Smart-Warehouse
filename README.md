@@ -61,3 +61,22 @@ Sau khi được đưa đến màn hình đăng kí, ta thực hiện nhập cá
 
 ### Trang chủ
 
+Sau khi đăng nhập thành công, ngừoi dùng sẽ được đưa đến giao diện trang chủ, tại màn hình này người dùng sẽ lựa chọn đi tới tính năng mong muốn.
+
+Trang chủ sẽ hiển thị Avatar, tên người dùng và đầy đủ các chức năng của ứng dụng.
+
+<p align="center">
+  <img src="https://scontent.fvca1-1.fna.fbcdn.net/v/t1.15752-9/108733542_307230267093261_3598315452916321521_n.png?_nc_cat=102&_nc_sid=ae9488&_nc_ohc=_bvxVrtm0g0AX8jTKsX&_nc_ht=scontent.fvca1-1.fna&oh=187b48ba471341e94ba3f4d83bc2f375&oe=5F33D092" width="350" title="hover text">
+</p>
+
+### Xem và thiết lập môi trường kho
+
+Đây chính là phần trọng tâm của dự án.
+
+Tại đây người dùng sẽ theo dõi thông số từ các thiết bị theo thời gian thực.
+
+Ngoài ra ngừoi dùng còn có thể thiết lập "nhiệt độ tiêu chuẩn" để quạt chạy với cơ chế như sau. Nếu nhiệt độ thực tế lớn hơn nhiệt độ tiêu chuẩn x độ quạt sẽ chạy với công suất (2x)% và công suất tối đa của quạt là 100%.
+
+<p align="center">
+  <img src="https://scontent.fvca1-1.fna.fbcdn.net/v/t1.15752-9/108733542_307230267093261_3598315452916321521_n.png?_nc_cat=102&_nc_sid=ae9488&_nc_ohc=_bvxVrtm0g0AX8jTKsX&_nc_ht=scontent.fvca1-1.fna&oh=187b48ba471341e94ba3f4d83bc2f375&oe=5F33D092" width="350" title="hover text">
+</p>
