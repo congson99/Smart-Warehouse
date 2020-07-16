@@ -19,6 +19,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView test;
 
     DatabaseReference databaseReference;
+    private Cipher cipher, decipher;
+    private SecretKeySpec secretKeySpec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +60,13 @@ public class LoginActivity extends AppCompatActivity {
         Intent intentf = getIntent();
         id.setText(intentf.getStringExtra("id"));
         pass.setText(intentf.getStringExtra("pass"));
+
+        try {
+            cipher = Cipher.getInstance("AES");
+            decipher = Cipher.getInstance("AES");
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+            e.printStackTrace();
+        }
 
         //test button
         test.setOnClickListener(new View.OnClickListener() {
@@ -81,18 +100,22 @@ public class LoginActivity extends AppCompatActivity {
                                 //Check account exist
                                 if(dataSnapshot.getValue() != null) {
                                     //check password
-                                    if(dataSnapshot.getValue().toString().equals(pass.getText().toString())){
-                                        //Move to home
-                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                        intent.putExtra("id",id.getText().toString());
-                                        startActivity(intent);
-                                        pass.setText("");
-                                        warn.setText("");
-                                        Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_LONG).show();
-                                    }
-                                    else {
-                                        pass.setError("Wrong password!");
-                                        pass.setText("");
+                                    try {
+                                        if(AESDecryptionMethod(dataSnapshot.getValue().toString()).equals(pass.getText().toString())){
+                                            //Move to home
+                                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                            intent.putExtra("id",id.getText().toString());
+                                            startActivity(intent);
+                                            pass.setText("");
+                                            warn.setText("");
+                                            Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_LONG).show();
+                                        }
+                                        else {
+                                            pass.setError("Wrong password!");
+                                            pass.setText("");
+                                        }
+                                    } catch (UnsupportedEncodingException e) {
+                                        e.printStackTrace();
                                     }
                                 }
                                 else {
@@ -122,4 +145,40 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+    private String AESEncryptionMethod(String string){
+        byte[] encryptionKey = {21, 35, 44, 69, 11, 55, 19, 99, 18, 20, 15, 44, 77, 23, 76, 12};
+        secretKeySpec = new SecretKeySpec(encryptionKey, "AES");
+        byte[] stringByte = string.getBytes();
+        byte[] encryptedByte = new byte[stringByte.length];
+        try {
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+            encryptedByte = cipher.doFinal(stringByte);
+        } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
+            e.printStackTrace();
+        }
+        String returnString = null;
+        try {
+            returnString = new String(encryptedByte, "ISO-8859-1");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return returnString;
+    };
+
+    private String AESDecryptionMethod(String string) throws UnsupportedEncodingException {
+        byte[] encryptionKey = {21, 35, 44, 69, 11, 55, 19, 99, 18, 20, 15, 44, 77, 23, 76, 12};
+        secretKeySpec = new SecretKeySpec(encryptionKey, "AES");
+        byte[] EncryptedByte = string.getBytes("ISO-8859-1");
+        String decryptedString = string;
+        byte[] decryption;
+        try {
+            decipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
+            decryption = decipher.doFinal(EncryptedByte);
+            decryptedString = new String(decryption);
+        } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
+            e.printStackTrace();
+        }
+        return decryptedString;
+    };
 }
