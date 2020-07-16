@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
@@ -33,6 +39,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class EnvironmentActivity extends AppCompatActivity {
 
@@ -51,6 +59,15 @@ public class EnvironmentActivity extends AppCompatActivity {
     ImageView bt_demo1;
     ImageView bt_demo2;
     ImageView refresh;
+    Switch fan;
+
+    GraphView graphView;
+    LineGraphSeries<DataPoint> tempData;
+    LineGraphSeries<DataPoint> humiData;
+    LineGraphSeries<DataPoint> fanData;
+    Timer aTimer = new Timer();
+    public double temporate = 0;
+    public boolean fanonoff = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +89,15 @@ public class EnvironmentActivity extends AppCompatActivity {
         bt_demo1 = (ImageView) findViewById(R.id.demo1ne);
         bt_demo2 = (ImageView) findViewById(R.id.quat);
         refresh = (ImageView) findViewById(R.id.demo2ne);
+        graphView = (GraphView) findViewById(R.id.graph1);
+        fan = (Switch) findViewById(R.id.fanonoff);
 
         //Clear
         show_humidity.setText("");
         show_temperature.setText("");
         show_speaker.setText("");
         best_cel.setText("");
+        fan.setChecked(true);
 
         //Set best cel
         databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("BestTemperature");
@@ -97,9 +117,34 @@ public class EnvironmentActivity extends AppCompatActivity {
             }
         });
 
+        fan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    fanonoff = true;
+                    startMQTTTempHumi("TempHumi", "Topic/TempHumi", show_temperature, show_humidity, best_cel);
+                    startMQTTSpeaker("Speaker", "Topic/Speaker", show_speaker);
+                    Toast.makeText(EnvironmentActivity.this, "Turn on the fan", Toast.LENGTH_LONG).show();
+                }else {
+                    fanonoff = false;
+                    startMQTTTempHumi("TempHumi", "Topic/TempHumi", show_temperature, show_humidity, best_cel);
+                    startMQTTSpeaker("Speaker", "Topic/Speaker", show_speaker);
+                    Toast.makeText(EnvironmentActivity.this, "Turn off the fan", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
         //Get value and set
         startMQTTTempHumi("TempHumi", "Topic/TempHumi", show_temperature, show_humidity, best_cel);
         startMQTTSpeaker("Speaker", "Topic/Speaker", show_speaker);
+
+        tempData = new LineGraphSeries<DataPoint>();
+        tempData.setColor(Color.RED);
+        humiData = new LineGraphSeries<DataPoint>();
+        humiData.setColor(Color.BLUE);
+        fanData = new LineGraphSeries<DataPoint>();
+        fanData.setColor(Color.GREEN);
+        setupThingSpeakTimer(true, show_temperature, show_humidity, show_speaker);
 
         //Chang best cel
         pre.setOnClickListener(new View.OnClickListener() {
@@ -231,6 +276,39 @@ public class EnvironmentActivity extends AppCompatActivity {
         });
     }
 
+    private void setupThingSpeakTimer(boolean value, final TextView a, final TextView b, final TextView c) {
+        TimerTask aTask = new TimerTask() {
+            @Override
+            public void run() {
+                if (!a.getText().toString().equals("") && !b.getText().toString().equals("") && !c.getText().toString().equals("")){
+                    tempData.appendData(new DataPoint(temporate,Double.parseDouble(a.getText().toString())), true, 100000);
+                    humiData.appendData(new DataPoint(temporate,Double.parseDouble(b.getText().toString())), true, 100000);
+                    fanData.appendData(new DataPoint(temporate,Double.parseDouble(c.getText().toString())), true, 100000);
+                    graphView.addSeries(tempData);
+                    graphView.addSeries(humiData);
+                    graphView.addSeries(fanData);
+                    if (temporate-50 < 0){
+                        graphView.getViewport().setMinX(0);
+                        graphView.getViewport().setMaxX(50);
+                    }else {
+                        graphView.getViewport().setMinX(temporate-50);
+                        graphView.getViewport().setMaxX(temporate);
+                    }
+                    graphView.getViewport().setMinY(0);
+                    graphView.getViewport().setMaxY(100);
+                    graphView.getViewport().setScrollable(true);
+                    temporate++;
+                }
+            }
+        };
+        if (value){
+            aTimer.schedule(aTask, 1000, 1000);
+        } else{
+            aTimer.cancel();
+        }
+
+    }
+
     private void startMQTTSpeaker(String ID, String topic, final  TextView a){
         mqttHelper = new MQTTHelper(getApplicationContext(), ID, topic);
         mqttHelper.setCallBack(new MqttCallbackExtended() {
@@ -272,6 +350,11 @@ public class EnvironmentActivity extends AppCompatActivity {
     }
 
     private void sendDataToMQTT(String ID, String value1, String value2) throws JSONException {
+
+        if (ID.equals("Speaker") && !fanonoff){
+            value1 = "0";
+            value2 = "1";
+        }
 
         MqttMessage msg = new MqttMessage();
         msg.setId(1234);
