@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
     <uses-feature android:name="android.hardware.usb.host" />
 
     <uses-permission android:name="android.permission.USB_PERMISSION" />
@@ -22,6 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".EnvDemoActivity"></activity>
         <activity android:name=".FanActivity" />
         <activity android:name=".DemoActivity" />
         <activity android:name=".HistoryActivity" />

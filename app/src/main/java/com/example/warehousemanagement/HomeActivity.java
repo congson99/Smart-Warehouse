@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -135,6 +136,17 @@ public class HomeActivity extends AppCompatActivity {
                 //Intent to About Us
                 Intent intent = new Intent(HomeActivity.this, AboutUsActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        //Test mode
+        name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, EnvDemoActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+                Toast.makeText(HomeActivity.this, "Test mode", Toast.LENGTH_LONG).show();
             }
         });
     }
