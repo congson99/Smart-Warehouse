@@ -59,6 +59,56 @@ Nếu chưa có tài khoản, ta sẽ bấm nút đăng kí và ứng dụng s�
 
 Sau khi được đưa đến màn hình đăng kí, ta thực hiện nhập các thông tin và nhấn đăng kí.
 
+Ngoài ra, trước khi mật khẩu được đưa lên Database, nó sẽ được mã hoá theo chuẩn Advanced Encryption Standard với key được đặt sẵn.
+
+Việc mã hoá này sẽ đảm bảo phần nào việc tài khoản người dùng không bị đánh cắp khi có kẻ xâm nhập vào Database hoặc tấn công từ mạng internet.
+Hàm mã hoá sẽ như sau:
+
+    private String AESEncryptionMethod(String string){
+      byte[] encryptionKey = {21, 35, 44, 69, 11, 55, 19, 99, 18, 20, 15, 44, 77, 23, 76, 12};
+      secretKeySpec = new SecretKeySpec(encryptionKey, "AES");
+      byte[] stringByte = string.getBytes();
+      byte[] encryptedByte = new byte[stringByte.length];
+      try {
+        cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+        encryptedByte = cipher.doFinal(stringByte);
+      } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
+        e.printStackTrace(); 
+      }
+      String returnString = null;
+      try {
+        returnString = new String(encryptedByte, "ISO-8859-1"); 
+      } catch (UnsupportedEncodingException e) {
+        e.printStackTrace(); 
+      }
+      return returnString;
+    }
+
+Tương tự khi lấy dữ liệu về để so sánh khi đăng nhập hoặc khi đổi mật khẩu, ứng dụng sẽ lấy đoạn text đã được mã hoá về và giải mã bằng key tương ứng.
+Hàm giải mã sẽ như sau:
+
+    private String AESDecryptionMethod(String string) throws UnsupportedEncodingException {
+      byte[] encryptionKey = {21, 35, 44, 69, 11, 55, 19, 99, 18, 20, 15, 44, 77, 23, 76, 12};
+      secretKeySpec = new SecretKeySpec(encryptionKey, "AES");
+      byte[] EncryptedByte = string.getBytes("ISO-8859-1");
+      String decryptedString = string;
+      byte[] decryption;
+      try {
+        decipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
+        decryption = decipher.doFinal(EncryptedByte);
+        decryptedString = new String(decryption);
+      } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
+        e.printStackTrace();
+      }
+      return decryptedString;
+    }
+
+Ví dụ khi mật khẩu là "son123" sau khi được mã hoá và được lưu vào Database như sau:
+
+<p align="center">
+  <img src="https://github.com/congson99/Warehouse-Management/blob/master/Report/pass.png?raw=true" width="450" title="hover text">
+</p>
+
 ### Trang chủ
 
 Sau khi đăng nhập thành công, ngừoi dùng sẽ được đưa đến giao diện trang chủ, tại màn hình này người dùng sẽ lựa chọn đi tới tính năng mong muốn.
@@ -75,11 +125,17 @@ Trang chủ sẽ hiển thị Avatar, tên người dùng và đầy đủ các 
 
 Tại đây người dùng sẽ theo dõi thông số từ các thiết bị theo thời gian thực.
 
+Đồng thời, màn hình cũng hiển thị thông số của ba thiết bị gồm: - Nhiệt độ: màu đỏ, đơn vị *C.
+- Độ ẩm: màu xanh dương, đơn vị %
+- Quạt: màu xanh lá, đơn vị % công suất tối đa.
+
 Ngoài ra ngừoi dùng còn có thể thiết lập "nhiệt độ tiêu chuẩn" để quạt chạy với cơ chế như sau. Nếu nhiệt độ thực tế lớn hơn nhiệt độ tiêu chuẩn x độ quạt sẽ chạy với công suất (2x)% và công suất tối đa của quạt là 100%.
 
 <p align="center">
   <img src="https://github.com/congson99/Warehouse-Management/blob/master/Report/env2.png?raw=true" width="350" title="hover text">
 </p>
+
+Ngoài ra,ta còn có một công tắc quạt thủ công, khi tắt công tắt dù nhiệt độ có chênh lệch bao nhiêu quạt cũng sẽ tắt.
 
 Để thực hiện tự động bật tắt quạt, ứng dụng gọi đến hàm startMQTTTempHumi để lấy thông số cảm biến và thực hiện tính toán. Sau đó sẽ gọi hàm sendDataToMQTT (hàm này sẽ được trình bày ở phần kết nối server) để thay đổi thông số quạt (Speaker).
 
