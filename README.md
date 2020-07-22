@@ -1,4 +1,20 @@
+**Trường Đại Học Bách Khoa Tp.Hồ Chí Minh**
+
+**Khoa Khoa Học và Kỹ Thuật Máy Tính**
+
+___
+
 # Warehouse Management
+## Môn Thực tập đồ án đa ngành
+
+Giáo viên hướng dẫn: Bùi Xuân Giang
+
+Sinh viên thực hiện:
+- Hồ Công Sơn     1712964
+- Tô Phú Quý      1712892
+- Phan Tấn Quốc   1712855
+- Hoàng Văn Sang  1712928
+- Nguyễn Văn Sỹ   1712996
 
 ## Giới thiệu đề tài
 
@@ -15,17 +31,6 @@ Người dùng sẽ tương tác với một ứng dụng di động đã kết 
 Cơ chế tổng quát được trình bày trong hình dưới đây:
 
 ![](https://github.com/congson99/Warehouse-Management/blob/master/Report/IntroDiagram.png?raw=true)
-
-## Thành viên nhóm
-
-Giáo viên hướng dẫn: Bùi Xuân Giang
-
-Sinh viên thực hiện:
-- Hồ Công Sơn     1712964
-- Tô Phú Quý      1712892
-- Phan Tấn Quốc   1712855
-- Hoàng Văn Sang  1712928
-- Nguyễn Văn Sỹ   1712996
 
 ## Thiết kế hệ thống
 
@@ -450,3 +455,7 @@ Vì vậy, nhóm đã đề ra rất nhiều hướng phát triển và hoàn th
 - Liên kết với công ty cung cấm thiết bị để tối ưu hoá hệ thống IOT cũng như dễ dàng lắp đặt cho người dùng đầu cuối.
 - Tích hợp các công nghệ mới như AI để phân tích số liệu, định hướng phát triển, phát triển tính năng dựa trên thói quen người dùng hoặc dựa trên hướng phát triển chung của ngành.
 - Mở rộng dự án sang các lĩnh vực liên quan có thể tích hợp như camera giám sát an ninh cho kho bảo quản, quản lí nông sản và gợi ý đầu tư, quản lý nông trại,...
+
+## Liên hệ
+
+congson99vn@gmail.com
