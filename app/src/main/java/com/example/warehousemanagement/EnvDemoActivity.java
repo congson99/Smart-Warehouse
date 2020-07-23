@@ -90,7 +90,7 @@ public class EnvDemoActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue().toString().length() == 1){
+                if (dataSnapshot.getValue().toString().length() == 1 && !dataSnapshot.getValue().toString().equals("0")){
                     best_cel.setText("0"+dataSnapshot.getValue().toString());
                 } else {
                     best_cel.setText(dataSnapshot.getValue().toString());

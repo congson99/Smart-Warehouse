@@ -45,14 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         final String id = intentf.getStringExtra("id");
 
         //Anh xa
-        name = (TextView) findViewById(R.id.home_name);
-        avatar = (ImageView) findViewById(R.id.home_circle_img_avt);
-        bt_environment = (CardView) findViewById(R.id.home_acti_environment_card);
-        bt_weather = (CardView) findViewById(R.id.home_acti_weather_card);
-        bt_account = (CardView) findViewById(R.id.home_acti_account_card);
-        bt_aboutus = (CardView) findViewById(R.id.home_acti_aboutus_card);
-        bt_products = (CardView) findViewById(R.id.home_acti_products_card);
-        bt_history = (CardView) findViewById(R.id.home_acti_history_card);
+        initView();
 
         //link to account info
         databaseReference = FirebaseDatabase.getInstance().getReference("Main").child("Account");
@@ -150,4 +143,16 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void initView(){
+        name = (TextView) findViewById(R.id.home_name);
+        avatar = (ImageView) findViewById(R.id.home_circle_img_avt);
+        bt_environment = (CardView) findViewById(R.id.home_acti_environment_card);
+        bt_weather = (CardView) findViewById(R.id.home_acti_weather_card);
+        bt_account = (CardView) findViewById(R.id.home_acti_account_card);
+        bt_aboutus = (CardView) findViewById(R.id.home_acti_aboutus_card);
+        bt_products = (CardView) findViewById(R.id.home_acti_products_card);
+        bt_history = (CardView) findViewById(R.id.home_acti_history_card);
+    }
+
 }
