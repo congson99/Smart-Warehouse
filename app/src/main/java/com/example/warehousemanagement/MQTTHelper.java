@@ -12,21 +12,18 @@ import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-
 public class MQTTHelper {
-//    final String serverUri = "tcp://52.187.125.59";
-//    /* Đường dẫn tới server, với giao thức tcp, và phải có thêm thông tin về cổng (Port).*/
+    final String serverUri = "tcp://52.230.1.253";
+
+    final String username = "BKvm";
+    final String password = "Hcmut_CSE_2020";
+
+//    final String serverUri = "tcp://104.215.152.76";
 //
-//
-//    final String username = "BKvm";
-//    final String password = "Hcmut_CSE_2020";
-
-    final String serverUri = "tcp://104.215.152.76";
-    /* Đường dẫn tới server, với giao thức tcp, và phải có thêm thông tin về cổng (Port).*/
+//    final String username = "mqtt";
+//    final String password = "mqtt";
 
 
-    final String username = "mqtt";
-    final String password = "mqtt";
     private String clientId, subscriptionTopic;
 
     public MqttAndroidClient mqttAndroidClient;

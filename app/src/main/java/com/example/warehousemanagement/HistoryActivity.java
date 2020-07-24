@@ -45,7 +45,7 @@ public class HistoryActivity extends AppCompatActivity {
 
                 for (int i = 0; i < stringMessageArray.length; i++) {
                     String[] stringKeyValue = stringMessageArray[i].split("=", 2);
-                    stringFinal[3*i] = (String) android.text.format.DateFormat.format("dd-MM-yyyy hh:mm:ss", Long.parseLong(stringKeyValue[0].substring(1,13)));
+                    stringFinal[3*i] = (String) android.text.format.DateFormat.format("dd-MM-yyyy hh:mm:ss", Long.parseLong(stringKeyValue[0].substring(0,13)));
                     stringFinal[3*i] += "\n" + stringKeyValue[0].substring(13);
                     stringFinal[3*i+1] = stringKeyValue[1];
                     stringFinal[3*i+2] = "";
